@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Chairs | Yalem Company Rentals</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Yalem Company Rentals</h1>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="#" class="active">Book Now</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="booking-page">
+        <div class="container">
+            <h1 class="section-title">Book Your Premium Chairs</h1>
+            <div class="decorative-line"></div>
+            
+            <div class="booking-container">
+                <div class="booking-intro">
+                    <p>Complete the form below to reserve your premium chairs for your upcoming event. Our team will confirm your booking within 24 hours.</p>
+                </div>
+                
+                <div class="booking-grid">
+                    <!-- Calendar Section -->
+                    <div class="calendar-section">
+                        <div class="calendar-container">
+                            <h2>Select Your Dates</h2>
+                            <div id="date-picker"></div>
+                            <div class="date-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color available"></span>
+                                    <span>Available</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color selected"></span>
+                                    <span>Selected</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color unavailable"></span>
+                                    <span>Unavailable</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-summary">
+                            <h2>Booking Summary</h2>
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Rental Period:</span>
+                                    <span id="summary-dates">Please select dates</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Total Days:</span>
+                                    <span id="summary-days">0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Chair Type:</span>
+                                    <span id="summary-chair-type">Not selected</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Quantity:</span>
+                                    <span id="summary-quantity">0</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Price Per Chair:</span>
+                                    <span id="summary-price">$0.00</span>
+                                </div>
+                                <div class="summary-divider"></div>
+                                <div class="summary-row total">
+                                    <span>Total Cost:</span>
+                                    <span id="summary-total">$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Section -->
+                    <div class="form-section">
+                        <form id="booking-form" class="premium-form">
+                            <div class="form-group">
+                                <label for="fullname">Full Name <span class="required">*</span></label>
+                                <input type="text" id="fullname" name="fullname" required>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="event-type">Event Type <span class="required">*</span></label>
+                                <select id="event-type" name="event-type" required>
+                                    <option value="">Select event type</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="birthday">Birthday Party</option>
+                                    <option value="conference">Conference</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group date-range">
+                                <label>Event Dates <span class="required">*</span></label>
+                                <div class="date-inputs">
+                                    <div class="date-input">
+                                        <label for="start-date">Start Date</label>
+                                        <input type="date" id="start-date" name="start-date" required>
+                                    </div>
+                                    <div class="date-input">
+                                        <label for="end-date">End Date</label>
+                                        <input type="date" id="end-date" name="end-date" required>
+                                    </div>
+                                </div>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="chair-quantity">Number of Chairs <span class="required">*</span></label>
+                                <input type="number" id="chair-quantity" name="chair-quantity" min="10" value="10" required>
+                                <span class="hint">Minimum order: 10 chairs</span>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="chair-style">Chair Style <span class="required">*</span></label>
+                                <select id="chair-style" name="chair-style" required>
+                                    <option value="">Select chair style</option>
+                                    <option value="chiavari-gold" data-price="12">Chiavari - Gold ($12/chair)</option>
+                                    <option value="chiavari-silver" data-price="12">Chiavari - Silver ($12/chair)</option>
+                                    <option value="ghost" data-price="18">Ghost/Clear ($18/chair)</option>
+                                    <option value="cross-back" data-price="15">Cross-Back Wooden ($15/chair)</option>
+                                    <option value="folding-white" data-price="8">Luxury Folding - White ($8/chair)</option>
+                                    <option value="folding-black" data-price="8">Luxury Folding - Black ($8/chair)</option>
+                                </select>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="venue-address">Venue Address <span class="required">*</span></label>
+                                <textarea id="venue-address" name="venue-address" rows="3" required></textarea>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="special-requirements">Special Requirements or Notes</label>
+                                <textarea id="special-requirements" name="special-requirements" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <label for="terms">I agree to the <a href="#" class="terms-link">Terms and Conditions</a> <span class="required">*</span></label>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="btn-text">Complete Booking</span>
+                                    <span class="btn-loader"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Booking Confirmation Modal -->
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="confirmation-header">
+                <i class="fas fa-check-circle"></i>
+                <h2>Booking Confirmed!</h2>
+            </div>
+            <div class="confirmation-details">
+                <p>Thank you for your booking. Your reference number is: <span id="booking-reference"></span></p>
+                <div class="confirmation-summary">
+                    <h3>Booking Details</h3>
+                    <div id="confirmation-details-content"></div>
+                </div>
+                <p>A confirmation email has been sent to your email address. Our team will contact you shortly to finalize the details.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="close-confirmation">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Yalem Company Rentals</h2>
+                    <p>Premium chair rentals for your special events</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="index.html#gallery">Gallery</a></li>
+                            <li><a href="index.html#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Information</h3>
+                        <ul>
+                            <li><a href="index.html#faq">FAQ</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="index.html#contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Yalem Company Rentals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html> 

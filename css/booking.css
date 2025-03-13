@@ -1,0 +1,584 @@
+/* 
+ * Yalem Seating - Premium Chair Rentals
+ * Booking Page Stylesheet
+ */
+
+/* ===== BOOKING PAGE STYLES ===== */
+.booking-page {
+    padding-top: 100px;
+    background-color: var(--color-off-white);
+    min-height: 100vh;
+}
+
+.booking-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+/* Calendar Section */
+.calendar-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.calendar-container {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    padding: var(--spacing-md);
+}
+
+.calendar-container h2 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#date-picker {
+    margin-bottom: var(--spacing-md);
+}
+
+.date-legend {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.legend-color.available {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-medium-gray);
+}
+
+.legend-color.selected {
+    background-color: var(--color-gold);
+}
+
+.legend-color.unavailable {
+    background-color: var(--color-light-gray);
+    position: relative;
+}
+
+.legend-color.unavailable::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-dark-gray);
+    transform: rotate(45deg);
+}
+
+/* Booking Summary */
+.booking-summary {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    padding: var(--spacing-md);
+}
+
+.booking-summary h2 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+.summary-row.total {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--color-gold);
+}
+
+.summary-divider {
+    height: 1px;
+    background-color: var(--color-medium-gray);
+    margin: var(--spacing-xs) 0;
+}
+
+/* Form Section */
+.form-section {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-light);
+    padding: var(--spacing-md);
+}
+
+.premium-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.required {
+    color: #e74c3c;
+    margin-left: 4px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-medium-gray);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.form-group.checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.form-group.checkbox input {
+    width: auto;
+    margin-top: 5px;
+}
+
+.form-group.checkbox label {
+    margin-bottom: 0;
+}
+
+.date-range .date-inputs {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.date-input {
+    flex: 1;
+}
+
+.date-input label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.hint {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-dark-gray);
+    margin-top: 4px;
+}
+
+.error-message {
+    display: block;
+    color: #e74c3c;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    min-height: 16px;
+}
+
+.form-actions {
+    margin-top: var(--spacing-sm);
+}
+
+.btn-loader {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--color-white);
+    animation: spin 0.8s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.btn.loading .btn-text {
+    opacity: 0.7;
+}
+
+.btn.loading .btn-loader {
+    display: inline-block;
+}
+
+/* Terms Link */
+.terms-link {
+    color: var(--color-gold);
+    text-decoration: underline;
+}
+
+.terms-link:hover {
+    color: var(--color-accent);
+}
+
+/* Confirmation Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-dark-gray);
+    transition: color var(--transition-fast);
+}
+
+.close-modal:hover {
+    color: var(--color-gold);
+}
+
+.confirmation-header {
+    text-align: center;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-medium-gray);
+}
+
+.confirmation-header i {
+    font-size: 3rem;
+    color: #2ecc71;
+    margin-bottom: var(--spacing-sm);
+}
+
+.confirmation-details {
+    padding: var(--spacing-md);
+}
+
+.confirmation-summary {
+    background-color: var(--color-off-white);
+    border-radius: 4px;
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+}
+
+.confirmation-summary h3 {
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.2rem;
+}
+
+.modal-actions {
+    padding: 0 var(--spacing-md) var(--spacing-md);
+    text-align: center;
+}
+
+/* Flatpickr Customization */
+.flatpickr-calendar {
+    box-shadow: var(--shadow-medium) !important;
+    border-radius: 8px !important;
+    border: none !important;
+    width: 100% !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.startRange.prevMonthDay,
+.flatpickr-day.endRange.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.startRange.nextMonthDay,
+.flatpickr-day.endRange.nextMonthDay {
+    background: var(--color-gold) !important;
+    border-color: var(--color-gold) !important;
+}
+
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus {
+    background: var(--color-gold-light) !important;
+    border-color: var(--color-gold-light) !important;
+}
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover,
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay,
+.flatpickr-day.notAllowed,
+.flatpickr-day.notAllowed.prevMonthDay,
+.flatpickr-day.notAllowed.nextMonthDay {
+    color: rgba(72, 72, 72, 0.3) !important;
+}
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+    background-color: var(--color-light-gray) !important;
+    text-decoration: line-through;
+}
+
+/* IntlTelInput Customization */
+.iti {
+    width: 100%;
+}
+
+.iti__flag-container {
+    z-index: 10;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .booking-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .calendar-section {
+        order: 2;
+    }
+    
+    .form-section {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .date-range .date-inputs {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .flatpickr-calendar {
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 14px;
+    }
+    
+    .flatpickr-days {
+        width: 100% !important;
+    }
+    
+    .flatpickr-day {
+        max-width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+    
+    .date-legend {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .booking-page {
+        padding-top: 80px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .booking-intro p {
+        font-size: 0.95rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        padding: 10px;
+    }
+    
+    .calendar-container h2,
+    .booking-summary h2 {
+        font-size: 1.3rem;
+    }
+    
+    /* Improve touch targets */
+    .btn {
+        min-height: 44px;
+        padding: 12px 24px;
+    }
+    
+    /* Fix modal on small screens */
+    .modal-content {
+        padding-bottom: 20px;
+        max-height: 85vh;
+        width: 92%;
+    }
+    
+    .confirmation-details {
+        font-size: 0.9rem;
+    }
+    
+    .date-input input[type="date"] {
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+    
+    /* Improve form spacing */
+    .premium-form {
+        gap: var(--spacing-sm);
+    }
+    
+    /* Make buttons more prominent */
+    .btn-primary {
+        width: 100%;
+    }
+    
+    /* Fix iOS input issues */
+    input[type="date"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .flatpickr-calendar {
+        padding: 10px;
+    }
+    
+    .flatpickr-day {
+        max-width: 35px;
+        height: 35px;
+        line-height: 35px;
+        margin: 2px;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
+    .summary-row {
+        font-size: 0.9rem;
+    }
+    
+    .summary-row.total {
+        font-size: 1.1rem;
+    }
+    
+    /* Further optimize for small screens */
+    .calendar-container,
+    .booking-summary,
+    .form-section {
+        padding: 15px;
+    }
+    
+    /* Optimize confirmation modal */
+    .confirmation-header i {
+        font-size: 2.5rem;
+    }
+    
+    .confirmation-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Add these styles for the date inputs */
+.date-input input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-medium-gray);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color var(--transition-fast);
+}
+
+.date-input input[type="date"]:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+} 

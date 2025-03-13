@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yalem Seating | Premium Chair Rentals for Events</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/calendar.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Yalem Company Rentals</h1>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#booking">Book Now</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Elevate Your Event</h1>
+                <p>Premium chair rentals for weddings, galas, and corporate events</p>
+                <a href="#booking" class="btn btn-primary">Book Now</a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="decorative-line"></div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-ring"></i>
+                        </div>
+                        <h3>Wedding Seating</h3>
+                        <p>Elegant chairs for your special day, from ceremony to reception.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-glass-cheers"></i>
+                        </div>
+                        <h3>Gala Events</h3>
+                        <p>Sophisticated seating options for your upscale gatherings.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Corporate Functions</h3>
+                        <p>Professional and comfortable seating for business events.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <h3>Private Parties</h3>
+                        <p>Stylish chairs for birthdays, anniversaries, and celebrations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery">
+            <div class="container">
+                <h2 class="section-title">Chair Collection</h2>
+                <div class="decorative-line"></div>
+                <div class="gallery-filter">
+                    <button class="filter-btn active" data-filter="all">All Styles</button>
+                    <button class="filter-btn" data-filter="chairs">Chairs</button>
+                    <button class="filter-btn" data-filter="tables">Tables</button>
+                    <button class="filter-btn" data-filter="setups">Complete Setups</button>
+                </div>
+                <div class="gallery-grid">
+                    <!-- Chair Images -->
+                    <div class="gallery-item" data-category="chairs">
+                        <img src="img/chairs/chairs.png" alt="Premium Chairs">
+                        <div class="gallery-item-overlay">
+                            <h3>Premium Chairs</h3>
+                            <p>Elegant seating options for any event</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Table Images -->
+                    <div class="gallery-item" data-category="tables">
+                        <img src="img/chairs/table.jpg" alt="Luxury Table">
+                        <div class="gallery-item-overlay">
+                            <h3>Luxury Tables</h3>
+                            <p>Stylish tables for your special occasions</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="tables">
+                        <img src="img/chairs/circletable.jpg" alt="Round Tables">
+                        <div class="gallery-item-overlay">
+                            <h3>Round Tables</h3>
+                            <p>Perfect for intimate gatherings</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="tables">
+                        <img src="img/chairs/circletable2.jpg" alt="Banquet Tables">
+                        <div class="gallery-item-overlay">
+                            <h3>Banquet Tables</h3>
+                            <p>Ideal for larger events and receptions</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Setup Images -->
+                    <div class="gallery-item" data-category="setups">
+                        <img src="img/chairs/tableandchairsetup.jpg" alt="Complete Event Setup">
+                        <div class="gallery-item-overlay">
+                            <h3>Event Setup</h3>
+                            <p>Full service setup for your special day</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item" data-category="setups">
+                        <img src="img/chairs/tablesandchairs.jpg" alt="Wedding Reception Setup">
+                        <div class="gallery-item-overlay">
+                            <h3>Wedding Reception</h3>
+                            <p>Elegant arrangements for your wedding</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <h2 class="section-title">Pricing Packages</h2>
+                <div class="decorative-line"></div>
+                <p class="section-description">Choose the perfect package for your event needs</p>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Standard</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">8</span>
+                                <span class="period">/ chair</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Basic folding chairs</li>
+                                <li><i class="fas fa-check"></i> Available in white or black</li>
+                                <li><i class="fas fa-check"></i> Minimum order: 10 chairs</li>
+                                <li><i class="fas fa-check"></i> 1-day rental included</li>
+                                <li><i class="fas fa-check"></i> Self pickup only</li>
+                                <li><i class="fas fa-times"></i> No setup/breakdown</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#booking" class="btn btn-outline">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Gold</h3>
+                            <div class="price">
+                                <span class="currency">$</span>
+                                <span class="amount">12</span>
+                                <span class="period">/ chair</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Premium Chiavari chairs</li>
+                                <li><i class="fas fa-check"></i> Multiple color options</li>
+                                <li><i class="fas fa-check"></i> Minimum order: 20 chairs</li>
+                                <li><i class="fas fa-check"></i> 2-day rental included</li>
+                                <li><i class="fas fa-check"></i> Self pickup only</li>
+                                <li><i class="fas fa-times"></i> No setup/breakdown</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#booking" class="btn btn-outline">Book Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <h3>Diamond</h3>
+                            <div class="price">
+                                <span class="contact-price">Contact for Pricing</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li><i class="fas fa-check"></i> Luxury Ghost/Clear chairs</li>
+                                <li><i class="fas fa-check"></i> Premium Cross-Back options</li>
+                                <li><i class="fas fa-check"></i> Custom minimum orders</li>
+                                <li><i class="fas fa-check"></i> Extended rental periods</li>
+                                <li><i class="fas fa-check"></i> Delivery and setup included</li>
+                                <li><i class="fas fa-check"></i> Contact for additional options</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <a href="#contact" class="btn btn-primary">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="booking">
+            <div class="container">
+                <h2 class="section-title">Book Your Chairs</h2>
+                <div class="decorative-line"></div>
+                <div class="booking-container">
+                    <div class="calendar-container">
+                        <div id="booking-calendar"></div>
+                    </div>
+                    <div class="booking-form-container">
+                        <form id="booking-form" class="booking-form">
+                            <div class="form-step active" data-step="1">
+                                <h3>Event Details</h3>
+                                <div class="form-group">
+                                    <label for="event-dates">Selected Dates</label>
+                                    <input type="text" id="event-dates" readonly required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-type">Event Type</label>
+                                    <select id="event-type" required>
+                                        <option value="">Select event type</option>
+                                        <option value="wedding">Wedding</option>
+                                        <option value="corporate">Corporate Event</option>
+                                        <option value="gala">Gala</option>
+                                        <option value="party">Private Party</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="chair-count">Number of Chairs</label>
+                                    <input type="number" id="chair-count" min="10" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="chair-style">Chair Style</label>
+                                    <select id="chair-style" required>
+                                        <option value="">Select chair style</option>
+                                        <option value="chiavari-gold">Chiavari - Gold</option>
+                                        <option value="chiavari-silver">Chiavari - Silver</option>
+                                        <option value="ghost">Ghost/Clear</option>
+                                        <option value="cross-back">Cross-Back Wooden</option>
+                                        <option value="folding-white">Luxury Folding - White</option>
+                                        <option value="folding-black">Luxury Folding - Black</option>
+                                    </select>
+                                </div>
+                                <div class="form-buttons">
+                                    <button type="button" class="btn btn-primary next-step">Continue</button>
+                                </div>
+                            </div>
+                            <div class="form-step" data-step="2">
+                                <h3>Venue & Setup</h3>
+                                <div class="form-group">
+                                    <label for="venue-name">Venue Name</label>
+                                    <input type="text" id="venue-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="venue-address">Venue Address</label>
+                                    <textarea id="venue-address" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="setup-time">Setup Time</label>
+                                    <input type="time" id="setup-time" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="breakdown-time">Breakdown Time</label>
+                                    <input type="time" id="breakdown-time" required>
+                                </div>
+                                <div class="form-buttons">
+                                    <button type="button" class="btn btn-secondary prev-step">Back</button>
+                                    <button type="button" class="btn btn-primary next-step">Continue</button>
+                                </div>
+                            </div>
+                            <div class="form-step" data-step="3">
+                                <h3>Contact Information</h3>
+                                <div class="form-group">
+                                    <label for="contact-name">Full Name</label>
+                                    <input type="text" id="contact-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email">Email</label>
+                                    <input type="email" id="contact-email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone">Phone</label>
+                                    <input type="tel" id="contact-phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="special-requests">Special Requests</label>
+                                    <textarea id="special-requests"></textarea>
+                                </div>
+                                <div class="form-buttons">
+                                    <button type="button" class="btn btn-secondary prev-step">Back</button>
+                                    <button type="submit" class="btn btn-primary">Submit Booking</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="booking-summary">
+                            <h3>Booking Summary</h3>
+                            <div id="summary-content">
+                                <p>Please select your dates and details to see a summary of your booking.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Client Testimonials</h2>
+                <div class="decorative-line"></div>
+                <div class="testimonial-slider">
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <p>"The chairs were absolutely stunning for our wedding. The gold Chiavari chairs elevated our entire reception space. The team was professional and prompt."</p>
+                            <div class="testimonial-author">
+                                <h4>Sarah & Michael</h4>
+                                <p>Wedding, June 2023</p>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <p>"We used Elegant Seating for our annual corporate gala. The ghost chairs were the perfect modern touch to our event. Setup was flawless and on time."</p>
+                            <div class="testimonial-author">
+                                <h4>Jennifer L.</h4>
+                                <p>Corporate Event, March 2023</p>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-content">
+                            <p>"The cross-back chairs were exactly what we needed for our rustic-themed wedding. The booking process was simple and the staff was incredibly helpful."</p>
+                            <div class="testimonial-author">
+                                <h4>Emma & David</h4>
+                                <p>Wedding, September 2023</p>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="prev-testimonial"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-testimonial"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="decorative-line"></div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What is included in the chair rental?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our chair rentals include delivery, setup, and pickup. Depending on your package, chair covers, sashes, and custom arrangement may also be included.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>How far in advance should I book?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We recommend booking at least 2-3 months in advance for peak wedding season (May-October). For other times, 1-2 months is usually sufficient.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What is your cancellation policy?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Cancellations made 30+ days before your event receive a full refund minus a $50 processing fee. Cancellations within 15-29 days receive a 50% refund. Cancellations less than 15 days before the event are non-refundable.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Do you offer chair covers and sashes?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer chair covers and sashes in various colors. These are included in our Gold and Diamond packages, or can be added to the Standard package for an additional fee.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>What is your service area?</h3>
+                            <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We service events within a 50-mile radius of our location at no additional charge. For events beyond this radius, a transportation fee may apply.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="decorative-line"></div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3>Our Location</h3>
+                                <p>123 Event Street, Suite 100<br>Celebration City, ST 12345</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>(555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>info@elegantseating.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3>Hours</h3>
+                                <p>Monday-Friday: 9am-6pm<br>Saturday: 10am-4pm<br>Sunday: Closed</p>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Yalem Company Rentals</h2>
+                    <p>Premium chair rentals for your special events</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Information</h3>
+                        <ul>
+                            <li><a href="#faq">FAQ</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Yalem Seating. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox for Gallery -->
+    <div class="lightbox" id="gallery-lightbox">
+        <div class="lightbox-content">
+            <span class="close-lightbox">&times;</span>
+            <img src="" alt="" id="lightbox-image">
+            <div class="lightbox-caption"></div>
+            <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html> 

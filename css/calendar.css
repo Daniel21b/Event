@@ -1,0 +1,238 @@
+/* 
+ * Elegant Seating - Premium Chair Rentals
+ * Calendar Stylesheet
+ */
+
+/* ===== CALENDAR STYLES ===== */
+.fc {
+    --fc-border-color: var(--color-medium-gray);
+    --fc-button-bg-color: var(--color-gold);
+    --fc-button-border-color: var(--color-gold);
+    --fc-button-hover-bg-color: var(--color-dark-gray);
+    --fc-button-hover-border-color: var(--color-dark-gray);
+    --fc-button-active-bg-color: var(--color-dark-gray);
+    --fc-button-active-border-color: var(--color-dark-gray);
+    --fc-event-bg-color: var(--color-gold);
+    --fc-event-border-color: var(--color-gold);
+    --fc-today-bg-color: var(--color-gold-light);
+    font-family: var(--font-body);
+}
+
+.fc .fc-toolbar-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
+
+.fc .fc-button {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    font-weight: 500;
+}
+
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: var(--color-dark-gray);
+    border-color: var(--color-dark-gray);
+}
+
+.fc .fc-daygrid-day-number {
+    font-weight: 500;
+    padding: 8px;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: var(--color-gold-light);
+}
+
+.fc .fc-daygrid-day.fc-day-past {
+    opacity: 0.6;
+}
+
+.fc .fc-daygrid-day.fc-day-future {
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.fc .fc-daygrid-day.fc-day-future:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+.fc .fc-daygrid-day.fc-day-selected {
+    background-color: rgba(212, 175, 55, 0.2);
+}
+
+.fc .fc-daygrid-day.fc-day-in-range {
+    background-color: rgba(212, 175, 55, 0.2);
+}
+
+.fc .fc-daygrid-day.fc-day-start-selected {
+    background-color: rgba(212, 175, 55, 0.3);
+}
+
+.fc .fc-daygrid-day.fc-day-end-selected {
+    background-color: rgba(212, 175, 55, 0.3);
+}
+
+.fc .fc-daygrid-day.fc-day-unavailable {
+    background-color: rgba(220, 53, 69, 0.1);
+    cursor: not-allowed;
+    position: relative;
+}
+
+.fc .fc-daygrid-day.fc-day-unavailable::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(220, 53, 69, 0.1),
+        rgba(220, 53, 69, 0.1) 10px,
+        rgba(220, 53, 69, 0.05) 10px,
+        rgba(220, 53, 69, 0.05) 20px
+    );
+}
+
+.fc .fc-daygrid-day.fc-day-unavailable .fc-daygrid-day-number {
+    color: rgba(220, 53, 69, 0.7);
+}
+
+.fc .fc-event {
+    border-radius: 2px;
+    font-size: 0.8rem;
+    padding: 2px 4px;
+}
+
+.fc .fc-event-title {
+    font-weight: 500;
+}
+
+.fc .fc-event-time {
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+/* Mobile Calendar Adjustments */
+@media (max-width: 768px) {
+    .fc .fc-toolbar.fc-header-toolbar {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .fc .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .fc .fc-toolbar-title {
+        font-size: 1.2rem;
+    }
+    
+    .fc .fc-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+    }
+    
+    .fc .fc-daygrid-day-number {
+        padding: 4px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Date Range Selection Tooltip */
+.date-range-tooltip {
+    position: absolute;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-medium-gray);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    box-shadow: var(--shadow-light);
+    font-size: 0.9rem;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.date-range-tooltip.visible {
+    opacity: 1;
+}
+
+.date-range-tooltip .price {
+    font-weight: 700;
+    color: var(--color-gold);
+}
+
+/* Date Range Summary */
+.date-range-summary {
+    background-color: var(--color-gold-light);
+    border-radius: 4px;
+    padding: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.date-range-summary p {
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-range-summary .total {
+    font-weight: 700;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+}
+
+/* Calendar Legend */
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background-color: var(--color-white);
+    border-radius: 4px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+.legend-available {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-medium-gray);
+}
+
+.legend-selected {
+    background-color: rgba(212, 175, 55, 0.2);
+}
+
+.legend-unavailable {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(220, 53, 69, 0.1),
+        rgba(220, 53, 69, 0.1) 5px,
+        rgba(220, 53, 69, 0.05) 5px,
+        rgba(220, 53, 69, 0.05) 10px
+    );
+}
+
+.legend-today {
+    background-color: var(--color-gold-light);
+} 
