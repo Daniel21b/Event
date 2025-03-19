@@ -66,109 +66,22 @@ function initNavigation() {
  * Gallery functionality
  */
 function initGallery() {
-    // Chair gallery data
-    const galleryItems = [
-        {
-            id: 1,
-            category: 'chiavari',
-            image: 'img/chairs/chiavari-gold.jpg',
-            title: 'Chiavari Gold',
-            description: 'Classic gold Chiavari chairs, perfect for elegant weddings and galas.'
-        },
-        {
-            id: 2,
-            category: 'chiavari',
-            image: 'img/chairs/chiavari-silver.jpg',
-            title: 'Chiavari Silver',
-            description: 'Sleek silver Chiavari chairs for a modern, sophisticated look.'
-        },
-        {
-            id: 3,
-            category: 'ghost',
-            image: 'img/chairs/ghost-clear.jpg',
-            title: 'Ghost Chair',
-            description: 'Transparent ghost chairs for a contemporary, minimalist aesthetic.'
-        },
-        {
-            id: 4,
-            category: 'cross-back',
-            image: 'img/chairs/cross-back-natural.jpg',
-            title: 'Cross-Back Natural',
-            description: 'Rustic cross-back chairs in natural wood finish.'
-        },
-        {
-            id: 5,
-            category: 'cross-back',
-            image: 'img/chairs/cross-back-walnut.jpg',
-            title: 'Cross-Back Walnut',
-            description: 'Elegant cross-back chairs in rich walnut finish.'
-        },
-        {
-            id: 6,
-            category: 'folding',
-            image: 'img/chairs/folding-white.jpg',
-            title: 'Luxury Folding White',
-            description: 'Premium white folding chairs with padded seats.'
-        },
-        {
-            id: 7,
-            category: 'folding',
-            image: 'img/chairs/folding-black.jpg',
-            title: 'Luxury Folding Black',
-            description: 'Sophisticated black folding chairs with padded seats.'
-        },
-        {
-            id: 8,
-            category: 'chiavari',
-            image: 'img/chairs/chiavari-white.jpg',
-            title: 'Chiavari White',
-            description: 'Elegant white Chiavari chairs, ideal for weddings and formal events.'
-        }
-    ];
-    
-    // Populate gallery grid
-    const galleryGrid = document.querySelector('.gallery-grid');
-    if (galleryGrid) {
-        // Create placeholder images until real images are available
-        galleryItems.forEach(item => {
-            const galleryItem = document.createElement('div');
-            galleryItem.className = `gallery-item ${item.category}`;
-            galleryItem.dataset.category = item.category;
-            
-            // For demo purposes, use placeholder images
-            const placeholderUrl = `https://via.placeholder.com/600x400/f5f5f5/333333?text=${item.title.replace(' ', '+')}`;
-            
-            galleryItem.innerHTML = `
-                <img src="${placeholderUrl}" alt="${item.title}" data-id="${item.id}">
-                <div class="gallery-item-overlay">
-                    <h3>${item.title}</h3>
-                    <p>${item.description}</p>
-                </div>
-            `;
-            
-            galleryGrid.appendChild(galleryItem);
-        });
-    }
-    
     // Gallery filtering
-    const filterButtons = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
+    const filterButtons = document.querySelectorAll('.filter-btn');
     
-    // Filter gallery items
     filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', () => {
             // Remove active class from all buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            
             // Add active class to clicked button
-            this.classList.add('active');
+            button.classList.add('active');
             
-            // Get filter value
-            const filterValue = this.getAttribute('data-filter');
+            const filterValue = button.getAttribute('data-filter');
             
-            // Show/hide gallery items based on filter
             galleryItems.forEach(item => {
-                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                const categories = item.getAttribute('data-category').split(' ');
+                if (filterValue === 'all' || categories.includes(filterValue)) {
                     item.style.display = 'block';
                 } else {
                     item.style.display = 'none';
@@ -338,9 +251,9 @@ function initBookingForm() {
     const summaryContent = document.getElementById('summary-content');
     
     // Form fields
-    const eventDatesInput = document.getElementById('event-dates');
+    const eventDateInput = document.getElementById('event-date');
     const eventTypeSelect = document.getElementById('event-type');
-    const chairCountInput = document.getElementById('chair-count');
+    const chairCountInput = document.getElementById('item-quantity');
     const chairStyleSelect = document.getElementById('chair-style');
     const venueNameInput = document.getElementById('venue-name');
     const venueAddressInput = document.getElementById('venue-address');
@@ -363,6 +276,53 @@ function initBookingForm() {
         'folding-black': 8
     };
     
+    // Add date input validation
+    if (eventDateInput) {
+        eventDateInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 4) {
+                value = value.slice(0,2) + '/' + value.slice(2);
+            }
+            if (value.length >= 7) {
+                value = value.slice(0,5) + '/' + value.slice(5,9);
+            }
+            e.target.value = value;
+            
+            // Validate date
+            if (value.length === 10) {
+                const date = new Date(value);
+                const today = new Date();
+                if (date < today) {
+                    showError(eventDateInput, 'Please select a future date');
+                } else {
+                    clearError(eventDateInput);
+                }
+            }
+        });
+    }
+
+    // Helper functions for form validation
+    function showError(input, message) {
+        const formGroup = input.closest('.form-group');
+        let errorDiv = formGroup.querySelector('.error-message');
+        if (!errorDiv) {
+            errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            formGroup.appendChild(errorDiv);
+        }
+        errorDiv.textContent = message;
+        input.classList.add('error');
+    }
+
+    function clearError(input) {
+        const formGroup = input.closest('.form-group');
+        const errorDiv = formGroup.querySelector('.error-message');
+        if (errorDiv) {
+            errorDiv.remove();
+        }
+        input.classList.remove('error');
+    }
+
     // Next step buttons
     nextButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -406,7 +366,7 @@ function initBookingForm() {
             if (validateStep(3)) {
                 // Collect all form data
                 const formData = {
-                    eventDates: eventDatesInput.value,
+                    eventDates: eventDateInput.value,
                     eventType: eventTypeSelect.value,
                     chairCount: chairCountInput.value,
                     chairStyle: chairStyleSelect.value,
@@ -477,44 +437,35 @@ function initBookingForm() {
     function updateBookingSummary() {
         if (!summaryContent) return;
         
-        // Get selected values
-        const dates = eventDatesInput.value;
+        const date = eventDateInput.value;
         const chairStyle = chairStyleSelect.value;
         const chairCount = chairCountInput.value;
         
-        // Calculate total price
-        let pricePerChair = 0;
-        let chairStyleName = '';
+        let summaryHTML = '<div class="booking-summary-content">';
         
-        if (chairStyle && pricingData[chairStyle]) {
-            pricePerChair = pricingData[chairStyle];
-            chairStyleName = chairStyleSelect.options[chairStyleSelect.selectedIndex].text;
+        if (date) {
+            summaryHTML += `<p><strong>Event Date:</strong> ${date}</p>`;
         }
         
-        const totalPrice = pricePerChair * chairCount;
-        
-        // Create summary HTML
-        let summaryHTML = '';
-        
-        if (dates && chairStyle && chairCount) {
-            summaryHTML = `
-                <div class="date-range-summary">
-                    <p><span>Event Dates:</span> <span>${dates}</span></p>
-                    <p><span>Chair Style:</span> <span>${chairStyleName}</span></p>
-                    <p><span>Number of Chairs:</span> <span>${chairCount}</span></p>
-                    <p><span>Price per Chair:</span> <span>$${pricePerChair.toFixed(2)}</span></p>
-                    <p class="total"><span>Total Price:</span> <span>$${totalPrice.toFixed(2)}</span></p>
-                </div>
+        if (chairStyle && chairCount) {
+            const chairStyleName = chairStyleSelect.options[chairStyleSelect.selectedIndex].text;
+            const pricePerChair = pricingData[chairStyle] || 0;
+            const totalPrice = pricePerChair * chairCount;
+            
+            summaryHTML += `
+                <p><strong>Chair Style:</strong> ${chairStyleName}</p>
+                <p><strong>Quantity:</strong> ${chairCount}</p>
+                <p><strong>Price per Chair:</strong> $${pricePerChair.toFixed(2)}</p>
+                <p class="total"><strong>Total:</strong> $${totalPrice.toFixed(2)}</p>
             `;
-        } else {
-            summaryHTML = '<p>Please select your dates and details to see a summary of your booking.</p>';
         }
         
+        summaryHTML += '</div>';
         summaryContent.innerHTML = summaryHTML;
     }
     
     // Update summary when form fields change
-    [eventDatesInput, chairStyleSelect, chairCountInput].forEach(field => {
+    [eventDateInput, chairStyleSelect, chairCountInput].forEach(field => {
         field.addEventListener('change', updateBookingSummary);
     });
 }
