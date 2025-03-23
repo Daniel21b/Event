@@ -285,7 +285,9 @@ header {
   max-width: 800px;
   margin: 0 auto;
   padding: 60px 20px;
-  color: white; /* adjust if your background is light */
+  color: white;
+  position: relative;   
+  z-index: 2;           
 }
 
 .hero-slogan {
