@@ -38,6 +38,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-content">
+            <div class="overlay">
                 <h2 class="hero-slogan">A World-Class Experience for Every Occasion</h2>
                 <p class="hero-description">
               YALEM Rentals is the premier provider of chair and table rentals throughout the DMV area.
@@ -47,7 +48,8 @@
                </p>
                <a href="#booking" class="btn btn-primary">Book Now</a>
             </div>
-        </section>
+        </div>
+    </section>
 .hero-content {
   text-align: center;
   max-width: 800px;
@@ -57,9 +59,11 @@
 }
 
 .hero-slogan {
-  font-size: 2.5rem;
+  font-size: 3rem; /* larger for impact */
+  font-weight: 700; /* bold */
   margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* subtle glow for visibility */
 }
 
 .hero-description {
@@ -68,6 +72,17 @@
   margin-bottom: 30px;
   font-family: 'Raleway', sans-serif;
 }
+.hero {
+  position: relative;
+  background: url('your-image.jpg') center center/cover no-repeat;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* dark transparent overlay */
+  padding: 100px 20px;
+  text-align: center;
+}
+
         <!-- Services Section -->
         <section id="services" class="services">
             <div class="container">
