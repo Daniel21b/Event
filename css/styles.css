@@ -291,12 +291,15 @@ header {
 }
 
 .hero-slogan {
-  font-size: 3rem; /* larger for impact */
-  font-weight: 700; /* bold */
+  font-size: 2.2rem;
+  font-style: italic;
+  font-weight: 400;
   margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* subtle glow for visibility */
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
+
 
 .hero-description {
   font-size: 1.1rem;
