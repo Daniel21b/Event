@@ -338,9 +338,10 @@ header {
     box-shadow: var(--shadow-light);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
 
-display: block;              
-text-decoration: none;       
-color: inherit; 
+    display: block;              
+    text-decoration: none;       
+    color: inherit; 
+    width: 100%;
 }
 
 .service-card:hover {
