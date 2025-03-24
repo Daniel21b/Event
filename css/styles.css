@@ -339,7 +339,10 @@ header {
 
 display: block;              
 text-decoration: none;       
-color: inherit;             
+color: inherit; 
+
+max-width: 300px;    
+margin: 0 auto; 
 }
 
 .service-card:hover {
