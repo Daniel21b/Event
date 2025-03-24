@@ -327,7 +327,7 @@ header {
     gap: var(--spacing-md);
     max-width: 1200px;     
     margin: 0 auto; 
-    justify-items: stretch;
+    justify-items: center;
 }
 
 .service-card {
