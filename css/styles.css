@@ -334,11 +334,18 @@ header {
     text-align: center;
     box-shadow: var(--shadow-light);
     transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+
+display: block;              
+text-decoration: none;       
+color: inherit;             
 }
 
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-medium);
+}
+.service-card {
+  cursor: pointer;
 }
 
 .service-icon {
