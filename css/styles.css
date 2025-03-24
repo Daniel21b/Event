@@ -325,6 +325,8 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-md);
+    max-width: 1200px;     
+    margin: 0 auto;        
 }
 
 .service-card {
