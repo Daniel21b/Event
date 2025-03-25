@@ -346,7 +346,12 @@ header {
   font-size: 0.95rem;
   margin-top: 1rem;
 }
-
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
 /* ===== GALLERY SECTION ===== */
 .gallery {
     padding: var(--spacing-xl) 0;
