@@ -331,9 +331,11 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 300px;
   padding: 1.5rem;
   text-align: center;
+  width: 100%;
+  max-width: 300px;
+  margin: auto; /* helps centering inside grid */
 }
 
 .service-icon {
@@ -365,6 +367,20 @@ header {
 .service-card h3 {
     margin-bottom: var(--spacing-sm);
 }
+
+.services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.service-card {
+  max-width: 300px;
+  width: 100%;
+}
+
 /* ===== GALLERY SECTION ===== */
 .gallery {
     padding: var(--spacing-xl) 0;
