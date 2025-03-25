@@ -349,6 +349,7 @@ header {
     display: block;              
     text-decoration: none;       
     color: inherit; 
+    flex-direction: column;
     width: 100%;
 }
 
