@@ -346,6 +346,25 @@ header {
   font-size: 0.95rem;
   margin-top: 1rem;
 }
+
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-medium);
+}
+.service-card {
+  cursor: pointer;
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.service-card h3 {
+    margin-bottom: var(--spacing-sm);
+}
 /* ===== GALLERY SECTION ===== */
 .gallery {
     padding: var(--spacing-xl) 0;
