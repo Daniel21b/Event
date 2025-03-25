@@ -333,9 +333,9 @@ header {
   justify-content: space-between;
   padding: 1.5rem;
   text-align: center;
-  width: 100%;
   max-width: 300px;
   margin: auto; /* helps centering inside grid */
+  flex: 1 1 300px;
 }
 
 .service-icon {
@@ -373,7 +373,6 @@ header {
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  padding: 2rem 0;
 }
 
 .service-card {
