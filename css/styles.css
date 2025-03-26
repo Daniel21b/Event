@@ -1197,8 +1197,7 @@ footer {
 @media (max-width: 768px) {
   .hero {
     padding: 2rem 1rem;
-    min-height: 100vh; 
-    height: auto;
+    height: auto; 
     background-position: top;
     display: flex;
     align-items: center;
