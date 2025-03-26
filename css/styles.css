@@ -306,7 +306,7 @@ header {
   font-family: 'Playfair Display', serif;
   letter-spacing: 0.8px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-  white-space: nowrap;             
+  white-space: normal;             
 }
 
 
@@ -1193,3 +1193,35 @@ footer {
 .form-group textarea.error {
     border-color: #dc3545;
 } 
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+    height: auto;
+    background-position: top;
+  }
+
+  .hero-content {
+    padding: 40px 10px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-slogan {
+    font-size: 1.2rem;
+    white-space: normal; /* Allow text wrapping */
+  }
+
+  .hero-description {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+}
