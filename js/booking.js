@@ -31,14 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return date.toLocaleDateString('en-US', options);
     }
 
-    // Calculate days between two dates
+
     function calculateDays(startDate, endDate) {
         const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         const diffDays = Math.round(Math.abs((startDate - endDate) / oneDay)) + 1;
         return diffDays;
     }
 
-    // Initialize flatpickr with a completely rewritten approach
+
     const datePicker = flatpickr("#date-picker", {
         mode: "range",
         minDate: "today",

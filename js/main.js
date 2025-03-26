@@ -357,6 +357,21 @@ function initBookingForm() {
         });
     });
     
+    // Add this helper function to convert 24-hour time to 12-hour format
+    function formatTime12Hour(time24) {
+        if (!time24) return '';
+        
+        const [hours, minutes] = time24.split(':');
+        let hour = parseInt(hours, 10);
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        
+        // Convert to 12-hour format
+        hour = hour % 12;
+        hour = hour ? hour : 12; // Convert '0' to '12'
+        
+        return `${hour}:${minutes} ${ampm}`;
+    }
+
     // Form submission
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
@@ -364,37 +379,82 @@ function initBookingForm() {
             
             // Validate final step
             if (validateStep(3)) {
-                // Collect all form data
-                const formData = {
-                    eventDates: eventDateInput.value,
-                    eventType: eventTypeSelect.value,
-                    chairCount: chairCountInput.value,
-                    chairStyle: chairStyleSelect.value,
-                    venueName: venueNameInput.value,
-                    venueAddress: venueAddressInput.value,
-                    setupTime: setupTimeInput.value,
-                    breakdownTime: breakdownTimeInput.value,
-                    contactName: contactNameInput.value,
-                    contactEmail: contactEmailInput.value,
-                    contactPhone: contactPhoneInput.value,
-                    specialRequests: specialRequestsInput.value
-                };
+                // Get the form data
+                const formData = new FormData(bookingForm);
                 
-                // In a real application, you would send this data to a server
-                console.log('Booking form submitted:', formData);
+                // Format times before sending
+                const setupTime = setupTimeInput ? setupTimeInput.value : '';
+                const breakdownTime = breakdownTimeInput ? breakdownTimeInput.value : '';
                 
-                // Show success message
-                alert('Thank you for your booking request! We will contact you shortly to confirm your reservation.');
+                // Remove the original time values
+                formData.delete('setup-time');
+                formData.delete('breakdown-time');
                 
-                // Reset form
-                bookingForm.reset();
+                // Add formatted time values
+                formData.append('setup-time', formatTime12Hour(setupTime) + ' (Original: ' + setupTime + ')');
+                formData.append('breakdown-time', formatTime12Hour(breakdownTime) + ' (Original: ' + breakdownTime + ')');
                 
-                // Go back to first step
-                formSteps.forEach(step => step.classList.remove('active'));
-                formSteps[0].classList.add('active');
+                // Add summary information to form data
+                if (summaryContent) {
+                    formData.append('booking-summary', summaryContent.innerText);
+                }
                 
-                // Clear summary
-                summaryContent.innerHTML = '<p>Please select your dates and details to see a summary of your booking.</p>';
+                // Show loading state
+                const submitButton = bookingForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'Submitting...';
+                submitButton.disabled = true;
+                
+                // Submit form to Formspree
+                fetch(bookingForm.getAttribute('action'), {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Show success message
+                        const successMessage = document.getElementById('booking-success-message');
+                        if (successMessage) {
+                            successMessage.style.display = 'block';
+                            
+                            // Scroll to success message
+                            successMessage.scrollIntoView({ behavior: 'smooth' });
+                            
+                            // Hide success message after 5 seconds
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 5000);
+                        } else {
+                            alert('Thank you for your booking request! We\'ll be in touch soon.');
+                        }
+                        
+                        // Reset form
+                        bookingForm.reset();
+                        
+                        // Go back to first step
+                        formSteps.forEach(step => step.classList.remove('active'));
+                        formSteps[0].classList.add('active');
+                        
+                        // Clear summary
+                        if (summaryContent) {
+                            summaryContent.innerHTML = '<p>Please select your dates and details to see a summary of your booking.</p>';
+                        }
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was a problem submitting your form. Please try again later.');
+                })
+                .finally(() => {
+                    // Reset button state
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
             }
         });
     }
@@ -477,63 +537,95 @@ function initContactForm() {
     const contactForm = document.getElementById('contact-form');
     
     if (contactForm) {
+        // Show/hide quantity fields based on checkbox selection
+        const rentalItems = document.querySelectorAll('input[name="rental-items"]');
+        rentalItems.forEach(item => {
+            item.addEventListener('change', function() {
+                const quantityGroup = document.getElementById(`${this.id}-quantity-group`);
+                if (quantityGroup) {
+                    quantityGroup.style.display = this.checked ? 'block' : 'none';
+                }
+            });
+        });
+        
+        // Form validation before submission
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form fields
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const phoneInput = document.getElementById('phone');
-            const messageInput = document.getElementById('message');
-            
-            // Validate form
             let isValid = true;
             
-            if (!nameInput.value.trim()) {
-                isValid = false;
-                nameInput.classList.add('error');
-            } else {
-                nameInput.classList.remove('error');
+            // Clear all previous error messages
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(msg => msg.textContent = '');
+            
+            // Validate required fields
+            const requiredFields = contactForm.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    const formGroup = field.closest('.form-group');
+                    const errorMessage = formGroup.querySelector('.error-message');
+                    if (errorMessage) {
+                        errorMessage.textContent = 'This field is required';
+                    }
+                    isValid = false;
+                }
+            });
+            
+            // Validate email format
+            const emailField = document.getElementById('email');
+            if (emailField && emailField.value.trim()) {
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(emailField.value)) {
+                    const formGroup = emailField.closest('.form-group');
+                    const errorMessage = formGroup.querySelector('.error-message');
+                    if (errorMessage) {
+                        errorMessage.textContent = 'Please enter a valid email address';
+                    }
+                    isValid = false;
+                }
             }
             
-            if (!emailInput.value.trim() || !isValidEmail(emailInput.value)) {
-                isValid = false;
-                emailInput.classList.add('error');
-            } else {
-                emailInput.classList.remove('error');
+            // If validation fails, prevent submission
+            if (!isValid) {
+                e.preventDefault();
+                return;
             }
             
-            if (!messageInput.value.trim()) {
-                isValid = false;
-                messageInput.classList.add('error');
-            } else {
-                messageInput.classList.remove('error');
-            }
-            
-            if (isValid) {
-                // Collect form data
-                const formData = {
-                    name: nameInput.value,
-                    email: emailInput.value,
-                    phone: phoneInput.value,
-                    message: messageInput.value
-                };
+            // Handle form submission with Formspree
+            if (contactForm.getAttribute('action').includes('formspree.io')) {
+                e.preventDefault();
                 
-                // In a real application, you would send this data to a server
-                console.log('Contact form submitted:', formData);
+                const formData = new FormData(contactForm);
                 
-                // Show success message
-                alert('Thank you for your message! We will get back to you shortly.');
-                
-                // Reset form
-                contactForm.reset();
+                fetch(contactForm.getAttribute('action'), {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Show success message
+                        contactForm.reset();
+                        document.getElementById('form-success-message').style.display = 'block';
+                        
+                        // Reset quantity fields display
+                        document.querySelectorAll('.quantity-group').forEach(group => {
+                            group.style.display = 'none';
+                        });
+                        
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            document.getElementById('form-success-message').style.display = 'none';
+                        }, 5000);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was a problem submitting your form. Please try again later.');
+                });
             }
         });
-    }
-    
-    // Email validation helper
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
     }
 } 

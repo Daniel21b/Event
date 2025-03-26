@@ -27,7 +27,6 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#pricing">Pricing</a></li>
                 <li><a href="#booking">Book Now</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -49,60 +48,63 @@
             </div>
          </section>
         <!-- Services Section -->
-                <section id="services" class="services">
-                   <div class="container">
-                    <h2 class="section-title">Services & Pricing</h2>
-                    <div class="decorative-line"></div>
-                    <div class="services-grid"> 
-                     <a href="#gallery" class="service-card" onclick="filterGallery('chairs')">
-                      <div class="service-icon"><i class="fas fa-chair"></i></div>
-                     <h3>Chairs</h3>
-                     <div class="price">
-                         <span class="currency">$</span>
-                         <span class="amount">2</span>
-                         <span class="period">/ chair</span>
-                     </div>
-                     <div class="price">
-                          <span class="currency">$</span>
-                          <span class="amount">2.50</span>
-                          <span class="period">/ chair with cover</span>
-                     </div>
-                   </a>
-                    <a href="#gallery" class="service-card" onclick="filterGallery('chairs')">
-                      <div class="service-icon"><i class="fas fa-table"></i></div>     
-                      <h3>Tables</h3>
-                      <div class="price">
-                         <span class="currency">$</span>
-                         <span class="amount">10</span>
-                         <span class="period">/ table</span>  
-                      </div>
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Services & Pricing</h2>
+                <div class="decorative-line"></div>
+                <div class="services-grid">
+                    <a href="#gallery-chairs" class="service-card" data-category="chairs" onclick="filterGallery('chairs')">
+                        <div class="service-icon"><i class="fas fa-chair"></i></div>
+                        <h3>Chairs</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">2</span>
+                            <span class="period">/ chair</span>
+                        </div>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">2.50</span>
+                            <span class="period">/ chair with cover</span>
+                        </div>
                     </a>
-                    <a href="#gallery" class="service-card" onclick="filterGallery('tents')">
-                      <div class="service-icon"><i class="fas fa-campground"></i></div>
+                    
+                    <a href="#gallery-tables" class="service-card" data-category="tables" onclick="filterGallery('tables')">
+                        <div class="service-icon"><i class="fas fa-table"></i></div>
+                        <h3>Tables</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">10</span>
+                            <span class="period">/ table</span>
+                        </div>
+                    </a>
+                    
+                    <a href="#gallery-tents" class="service-card" data-category="tents" onclick="filterGallery('tents')">
+                        <div class="service-icon"><i class="fas fa-campground"></i></div>
                         <h3>Tents</h3>
                         <div class="price">
-                         <span class="currency">$</span>
-                         <span class="amount">250</span>
-                         <span class="period">/ 24hr</span>  
-                      </div>
+                            <span class="currency">$</span>
+                            <span class="amount">250</span>
+                            <span class="period">/ 24hr</span>
+                        </div>
                     </a>
-                    <a href="#gallery" class="service-card" onclick="filterGallery('decoration')">
-                      <div class="service-icon"><i class="fas fa-star"></i></div>
-                      <h3>Two piece arc set</h3>
-                      <div class="price">
-                         <span class="currency">$</span>
-                         <span class="amount">30</span>
-                         <span class="period">/ set</span>  
-                      </div>
-                      <div class="price">
-                          <span class="currency">$</span>
-                          <span class="amount">200</span>
-                          <span class="period">/ arch set with customizable ballons</span>
-                     </div>
+                    
+                    <a href="#gallery-backdrops" class="service-card" data-category="backdrops" onclick="filterGallery('backdrops')">
+                        <div class="service-icon"><i class="fas fa-star"></i></div>
+                        <h3>Two piece arc set</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">30</span>
+                            <span class="period">/ set</span>
+                        </div>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">200</span>
+                            <span class="period">/ arch set with customizable ballons</span>
+                        </div>
                     </a>
-                  </div>
                 </div>
-               </section>
+            </div>
+        </section>
 
         <!-- Gallery Section -->
         <section id="gallery" class="gallery">
@@ -117,7 +119,7 @@
                 </div>
             <div class="gallery-grid">
                     <!-- Essential Items Only -->
-                    <div class="gallery-item" data-category="chairs">
+                    <div id="gallery-chairs" class="gallery-item" data-category="chairs">
                         <img src="img/chairs/chairs_withcover.webp" alt="Premium Chairs">
                         <div class="gallery-item-overlay">
                             <h3>Premium Chairs</h3>
@@ -125,15 +127,7 @@
                         </div>
                     </div>
                 
-                    <div class="gallery-item" data-category="chairs">
-                        <img src="img/chairs/chairs.png" alt="Premium Chairs">
-                        <div class="gallery-item-overlay">
-                           <h3>Premium Chairs</h3>
-                           <p>Stylish and comfortable chairs for your event </p>
-                        </div>
-                     </div>
-                
-                    <div class="gallery-item" data-category="all tables">
+                    <div id="gallery-tables" class="gallery-item" data-category="tables">
                         <img src="img/chairs/circletable.jpg" alt="Event Tables">
                         <div class="gallery-item-overlay">
                             <h3>Event Tables</h3>
@@ -141,7 +135,7 @@
                         </div>
                     </div>
                 
-                    <div class="gallery-item" data-category="all tents">
+                    <div id="gallery-tents" class="gallery-item" data-category="tents">
                         <img src="img/tents/10X30 tent.png" alt="Event Tents">
                         <div class="gallery-item-overlay">
                             <h3>Event Tents</h3>
@@ -149,7 +143,7 @@
                         </div>
                     </div>
                 
-                    <div class="gallery-item" data-category="all backdrops">
+                    <div id="gallery-backdrops" class="gallery-item" data-category="backdrops">
                         <img src="img/backdrops/decor_one.png" alt="Event Backdrop">
                         <div class="gallery-item-overlay">
                             <h3>Event Backdrop</h3>
@@ -175,95 +169,6 @@
                 </div>
         </section>
 
-        <!-- Pricing Section -->
-        <section id="pricing" class="pricing">
-            <div class="container">
-                <h2 class="section-title">Pricing</h2>
-                <div class="decorative-line"></div>
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Chairs</h3>
-                            <div class="price">
-                                <span class="currency">$</span>
-                                <span class="amount">2</span>
-                                <span class="period">/ chair</span>
-                            </div>
-                            <div class="price">
-                                <span class="currency">$</span>
-                                <span class="amount">2.50</span>
-                                <span class="period">/ chair with cover</span>
-                            </div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul>
-                                <li><i class="fas fa-check"></i> Multiple chair styles available</li>
-                                <li><i class="fas fa-check"></i> Chair covers optional</li>
-                                <li><i class="fas fa-check"></i> Delivery available</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Tables</h3>
-                            <div class="price">
-                                <span class="currency">$</span>
-                                <span class="amount">10</span>
-                                <span class="period">/ table</span>
-                            </div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul>
-                                <li><i class="fas fa-check"></i> Rectangular tables available</li>
-                                <li><i class="fas fa-check"></i> Round tables available</li>
-                                <li><i class="fas fa-check"></i> Various sizes</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Tents</h3>
-                            <div class="price">
-                                <span class="contact-price">Contact for Pricing</span>
-                            </div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul>
-                                <li><i class="fas fa-check"></i> Multiple sizes available</li>
-                                <li><i class="fas fa-check"></i> Setup included</li>
-                                <li><i class="fas fa-check"></i> Weather resistant</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3>Backdrops & Decorations</h3>
-                            <div class="price">
-                                <span class="currency">$</span>
-                                <span class="amount">30</span>
-                                <span class="period">/ arch backdrop</span>
-                            </div>
-                            <div class="price">
-                                <span class="currency">$</span>
-                                <span class="amount">300</span>
-                                <span class="period">/ 2PCS arch set with customizable balloons</span>
-                            </div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul>
-                                <li><i class="fas fa-check"></i> Beautiful backdrop designs</li>
-                                <li><i class="fas fa-check"></i> 3PCS cylinder pedestal stands</li>
-                                <li><i class="fas fa-check"></i> Custom decorations available</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Booking Section -->
         <section id="booking" class="booking">
             <div class="container">
@@ -271,7 +176,7 @@
                 <div class="decorative-line"></div>
                 <div class="booking-container">
                     <div class="form-container">
-                        <form id="booking-form" class="booking-form">
+                        <form id="booking-form" class="booking-form" action="https://formspree.io/f/myzepqby" method="POST">
                             <div class="form-step active" data-step="1">
                                 <h3>Event Details</h3>
                                 <!-- Calendar Display (Read-only) -->
@@ -280,9 +185,10 @@
                                     <small class="calendar-note">* Calendar shows available dates. Please use the input field below to enter your event date.</small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="event-date">Event Date (MM/DD/YYYY)</label>
+                                    <label for="event-date">Event Date (MM/DD/YYYY) <span class="required">*</span></label>
                                     <input type="text" 
                                            id="event-date" 
+                                           name="event-date"
                                            placeholder="Enter your event date" 
                                            pattern="\d{2}/\d{2}/\d{4}"
                                            title="Please use format: MM/DD/YYYY"
@@ -290,8 +196,8 @@
                                     <small class="form-text">Example: 03/25/2024</small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="service-type">Service Type</label>
-                                    <select id="service-type" required>
+                                    <label for="service-type">Service Type <span class="required">*</span></label>
+                                    <select id="service-type" name="service-type" required>
                                         <option value="">Select service type</option>
                                         <option value="chairs">Chairs</option>
                                         <option value="chairs-covered">Chairs with Covers</option>
@@ -303,12 +209,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="item-quantity">Quantity</label>
-                                    <input type="number" id="item-quantity" min="1" required>
+                                    <label for="item-quantity">Quantity <span class="required">*</span></label>
+                                    <input type="number" id="item-quantity" name="item-quantity" min="1" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="rental-duration">Rental Duration</label>
-                                    <select id="rental-duration" required>
+                                    <label for="rental-duration">Rental Duration <span class="required">*</span></label>
+                                    <select id="rental-duration" name="rental-duration" required>
                                         <option value="">Select rental duration</option>
                                         <option value="6-hours">6 Hours</option>
                                         <option value="12-hours">12 Hours</option>
@@ -319,8 +225,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="delivery-option">Delivery Option</label>
-                                    <select id="delivery-option" required>
+                                    <label for="delivery-option">Delivery Option <span class="required">*</span></label>
+                                    <select id="delivery-option" name="delivery-option" required>
                                         <option value="">Select delivery option</option>
                                         <option value="delivery">Delivery</option>
                                         <option value="pickup">Self Pickup</option>
@@ -333,20 +239,20 @@
                             <div class="form-step" data-step="2">
                                 <h3>Venue & Setup</h3>
                                 <div class="form-group">
-                                    <label for="venue-name">Venue Name</label>
-                                    <input type="text" id="venue-name" required>
+                                    <label for="venue-name">Venue Name <span class="required">*</span></label>
+                                    <input type="text" id="venue-name" name="venue-name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="venue-address">Venue Address</label>
-                                    <textarea id="venue-address" required></textarea>
+                                    <label for="venue-address">Venue Address <span class="required">*</span></label>
+                                    <textarea id="venue-address" name="venue-address" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="setup-time">Setup Time</label>
-                                    <input type="time" id="setup-time" required>
+                                    <label for="setup-time">Setup Time <span class="required">*</span></label>
+                                    <input type="time" id="setup-time" name="setup-time" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="breakdown-time">Breakdown Time</label>
-                                    <input type="time" id="breakdown-time" required>
+                                    <label for="breakdown-time">Breakdown Time <span class="required">*</span></label>
+                                    <input type="time" id="breakdown-time" name="breakdown-time" required>
                                 </div>
                                 <div class="form-buttons">
                                     <button type="button" class="btn btn-secondary prev-step">Back</button>
@@ -356,20 +262,26 @@
                             <div class="form-step" data-step="3">
                                 <h3>Contact Information</h3>
                                 <div class="form-group">
-                                    <label for="contact-name">Full Name</label>
-                                    <input type="text" id="contact-name" required>
+                                    <label for="contact-name">Full Name <span class="required">*</span></label>
+                                    <input type="text" id="contact-name" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="contact-email">Email</label>
-                                    <input type="email" id="contact-email" required>
+                                    <label for="contact-email">Email <span class="required">*</span></label>
+                                    <input type="email" id="contact-email" name="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="contact-phone">Phone</label>
-                                    <input type="tel" id="contact-phone" required>
+                                    <label for="contact-phone">Phone <span class="required">*</span></label>
+                                    <input type="tel" id="contact-phone" name="phone" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="special-requests">Special Requests</label>
-                                    <textarea id="special-requests"></textarea>
+                                    <textarea id="special-requests" name="special-requests"></textarea>
+                                </div>
+                                <input type="hidden" name="_subject" value="New Booking Request from Website">
+                                <input type="text" name="_gotcha" style="display:none">
+                                <div id="booking-success-message" class="success-message" style="display:none;">
+                                    <i class="fas fa-check-circle"></i>
+                                    <p>Thank you for your booking request! We'll be in touch with you shortly to confirm details.</p>
                                 </div>
                                 <div class="form-buttons">
                                     <button type="button" class="btn btn-secondary prev-step">Back</button>
@@ -547,24 +459,80 @@
                         </div>
                     </div>
                     <div class="contact-form-container">
-                        <form id="contact-form" class="contact-form">
+                        <form id="contact-form" class="contact-form" action="https://formspree.io/f/myzepqby" method="POST">
                             <div class="form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" id="name" required>
+                                <label for="name">Your Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" required>
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required>
+                                <span class="error-message"></span>
                             </div>
                             <div class="form-group">
-                                <label for="message">Your Message</label>
-                                <textarea id="message" required></textarea>
+                                <label for="event-date">Event Date <span class="required">*</span></label>
+                                <input type="date" id="event-date" name="event-date" required>
+                                <span class="error-message"></span>
                             </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <div class="form-group">
+                                <label for="event-location">Event Location</label>
+                                <input type="text" id="event-location" name="event-location">
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Items to Rent</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="chairs" name="rental-items" value="Chairs">
+                                        <label for="chairs">Chairs</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tables" name="rental-items" value="Tables">
+                                        <label for="tables">Tables</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tents" name="rental-items" value="Tents">
+                                        <label for="tents">Tents</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="arc-set" name="rental-items" value="Two-piece arc set">
+                                        <label for="arc-set">Two-piece arc set</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group quantity-group" id="chairs-quantity-group" style="display:none;">
+                                <label for="chairs-quantity">Number of Chairs</label>
+                                <input type="number" id="chairs-quantity" name="chairs-quantity" min="1" value="1">
+                            </div>
+                            <div class="form-group quantity-group" id="tables-quantity-group" style="display:none;">
+                                <label for="tables-quantity">Number of Tables</label>
+                                <input type="number" id="tables-quantity" name="tables-quantity" min="1" value="1">
+                            </div>
+                            <div class="form-group quantity-group" id="tents-quantity-group" style="display:none;">
+                                <label for="tents-quantity">Number of Tents</label>
+                                <input type="number" id="tents-quantity" name="tents-quantity" min="1" value="1">
+                            </div>
+                            <div class="form-group quantity-group" id="arc-set-quantity-group" style="display:none;">
+                                <label for="arc-set-quantity">Number of Arc Sets</label>
+                                <input type="number" id="arc-set-quantity" name="arc-set-quantity" min="1" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Additional Comments or Special Requests</label>
+                                <textarea id="message" name="message"></textarea>
+                            </div>
+                            <input type="hidden" name="_subject" value="New Rental Booking Request">
+                            <input type="text" name="_gotcha" style="display:none">
+                            <div id="form-success-message" class="success-message" style="display:none;">
+                                <i class="fas fa-check-circle"></i>
+                                <p>Thank you for your booking request! We'll be in touch with you shortly.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Request Booking</button>
                         </form>
                     </div>
                 </div>
@@ -631,10 +599,26 @@
     <script src="js/calendar.js"></script>
     <script>
   function filterGallery(category) {
+    // Trigger the filter button click for the specified category
     const filterBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
     if (filterBtn) {
       filterBtn.click();
     }
+    
+    // Get the target element to scroll to
+    const targetId = `#gallery-${category}`;
+    const targetElement = document.querySelector(targetId);
+    
+    // Smooth scroll to the target element with offset for header
+    if (targetElement) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: targetElement.offsetTop - 100, // Adjust for header height
+          behavior: 'smooth'
+        });
+      }, 100); // Short delay to allow filter to complete
+    }
   }
+</script>
 </body>
 </html> 
