@@ -70,6 +70,19 @@ function initGallery() {
     const galleryItems = document.querySelectorAll('.gallery-item');
     const filterButtons = document.querySelectorAll('.filter-btn');
     
+    // Print all image paths to console for debugging
+    console.log("Gallery images paths:");
+    galleryItems.forEach(item => {
+        const img = item.querySelector('img');
+        if (img) {
+            console.log(img.src);
+            
+            // Add more detailed folder structure logging
+            const pathParts = img.src.split('/');
+            console.log('Image folder structure:', pathParts);
+        }
+    });
+    
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             // Remove active class from all buttons
@@ -78,15 +91,77 @@ function initGallery() {
             button.classList.add('active');
             
             const filterValue = button.getAttribute('data-filter');
+            console.log("Selected filter:", filterValue);
             
-            galleryItems.forEach(item => {
-                const categories = item.getAttribute('data-category').split(' ');
-                if (filterValue === 'all' || categories.includes(filterValue)) {
+            // Create an array from gallery items to sort them
+            const itemsArray = Array.from(galleryItems);
+            
+            // Sort items by the image filename
+            itemsArray.sort((a, b) => {
+                const imgA = a.querySelector('img').src.split('/').pop();
+                const imgB = b.querySelector('img').src.split('/').pop();
+                return imgA.localeCompare(imgB);
+            });
+            
+            // Filter and display items
+            itemsArray.forEach(item => {
+                const imgSrc = item.querySelector('img').src.toLowerCase();
+                
+                // Special debug info for chair images
+                if (imgSrc.includes('chair')) {
+                    console.log('FOUND CHAIR IMAGE: ' + imgSrc);
+                    console.log('Full path parts:', imgSrc.split('/'));
+                    console.log('Is in chairs folder: ' + imgSrc.includes('/chairs/'));
+                    console.log('Is in chair folder: ' + imgSrc.includes('/chair/'));
+                    console.log('Has table in name: ' + imgSrc.includes('table'));
+                    console.log('Has cover in name: ' + imgSrc.includes('cover'));
+                }
+                
+                if (filterValue === 'all') {
                     item.style.display = 'block';
-                } else {
+                } 
+                else if (filterValue === 'chairs') {
+                    // Expanded chair filtering to handle both singular and plural folder names
+                    const isInChairsFolder = imgSrc.includes('/chairs/') || imgSrc.includes('/chairs/') || imgSrc.includes('/images/chair/');
+                    const isTableImage = imgSrc.includes('table');
+                    item.style.display = (isInChairsFolder && !isTableImage) ? 'block' : 'none';
+                    
+                    console.log(`Chair Filter: ${imgSrc} - ${item.style.display}`);
+                } 
+                else if (filterValue === 'tables') {
+                    const isInTableFolder = imgSrc.includes('/table/') || imgSrc.includes('/tables/');
+                    const isTableInChairsFolder = (imgSrc.includes('/chairs/') || imgSrc.includes('/chair/')) && imgSrc.includes('table');
+                    item.style.display = (isInTableFolder || isTableInChairsFolder) ? 'block' : 'none';
+                }
+                else if (filterValue === 'tents') {
+                    // For tents category
+                    const isInTentsFolder = imgSrc.includes('/tents/') || imgSrc.includes('/tent/');
+                    const hasTentInName = imgSrc.includes('tent');
+                    item.style.display = (isInTentsFolder || hasTentInName) ? 'block' : 'none';
+                }
+                else if (filterValue === 'backdrops') {
+                    // For backdrops category
+                    const isInBackdropsFolder = imgSrc.includes('/backdrops/') || imgSrc.includes('/backdrop/');
+                    const hasBackdropInName = imgSrc.includes('backdrop') || imgSrc.includes('decor');
+                    item.style.display = (isInBackdropsFolder || hasBackdropInName) ? 'block' : 'none';
+                }
+                else {
                     item.style.display = 'none';
                 }
+                
+                // Log which items are being displayed for debugging
+                console.log(`Item ${imgSrc} display: ${item.style.display}`);
             });
+            
+            // Re-order the items in the DOM based on the sorted array
+            const galleryGrid = document.querySelector('.gallery-grid');
+            if (galleryGrid) {
+                itemsArray.forEach(item => {
+                    if (item.style.display === 'block') {
+                        galleryGrid.appendChild(item);
+                    }
+                });
+            }
         });
     });
     
@@ -524,8 +599,9 @@ function initBookingForm() {
         summaryContent.innerHTML = summaryHTML;
     }
     
-    // Update summary when form fields change
-    [eventDateInput, chairStyleSelect, chairCountInput].forEach(field => {
+    // Update summary when form fields change - WITH NULL CHECK
+    const fieldsToWatch = [eventDateInput, chairStyleSelect, chairCountInput].filter(field => field !== null);
+    fieldsToWatch.forEach(field => {
         field.addEventListener('change', updateBookingSummary);
     });
 }
