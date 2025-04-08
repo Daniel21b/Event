@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all components
     initNavigation();
     initGallery();
-    initTestimonials();
     initFAQ();
     initBookingForm();
     initContactForm();
@@ -242,56 +241,6 @@ function initGallery() {
 }
 
 /**
- * Testimonials slider functionality
- */
-function initTestimonials() {
-    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-    const prevButton = document.querySelector('.prev-testimonial');
-    const nextButton = document.querySelector('.next-testimonial');
-    
-    if (testimonialSlides.length === 0) return;
-    
-    let currentSlide = 0;
-    
-    // Show first slide
-    testimonialSlides[0].classList.add('active');
-    
-    // Function to show a specific slide
-    function showSlide(index) {
-        // Remove active class from all slides
-        testimonialSlides.forEach(slide => slide.classList.remove('active'));
-        
-        // Add active class to current slide
-        testimonialSlides[index].classList.add('active');
-        
-        // Update current slide index
-        currentSlide = index;
-    }
-    
-    // Previous slide button
-    if (prevButton) {
-        prevButton.addEventListener('click', function() {
-            const newIndex = (currentSlide - 1 + testimonialSlides.length) % testimonialSlides.length;
-            showSlide(newIndex);
-        });
-    }
-    
-    // Next slide button
-    if (nextButton) {
-        nextButton.addEventListener('click', function() {
-            const newIndex = (currentSlide + 1) % testimonialSlides.length;
-            showSlide(newIndex);
-        });
-    }
-    
-    // Auto-rotate testimonials
-    setInterval(function() {
-        const newIndex = (currentSlide + 1) % testimonialSlides.length;
-        showSlide(newIndex);
-    }, 5000);
-}
-
-/**
  * FAQ accordion functionality
  */
 function initFAQ() {
@@ -493,29 +442,65 @@ function initBookingForm() {
                         // Show success message
                         const successMessage = document.getElementById('booking-success-message');
                         if (successMessage) {
+                            // Hide the form buttons while showing success message
+                            const formButtons = document.querySelector('.form-buttons');
+                            if (formButtons) {
+                                formButtons.style.display = 'none';
+                            }
+                            
+                            // Show success message
                             successMessage.style.display = 'block';
+                            
+                            // Add a "New Booking" button to the success message
+                            if (!document.getElementById('new-booking-btn')) {
+                                const newBookingBtn = document.createElement('button');
+                                newBookingBtn.id = 'new-booking-btn';
+                                newBookingBtn.className = 'btn btn-primary';
+                                newBookingBtn.textContent = 'Make Another Booking';
+                                newBookingBtn.style.marginTop = '15px';
+                                successMessage.appendChild(newBookingBtn);
+                                
+                                // Add event listener to reset form when button is clicked
+                                newBookingBtn.addEventListener('click', function() {
+                                    // Reset form
+                                    bookingForm.reset();
+                                    
+                                    // Go back to first step
+                                    formSteps.forEach(step => step.classList.remove('active'));
+                                    formSteps[0].classList.add('active');
+                                    
+                                    // Clear summary
+                                    if (summaryContent) {
+                                        summaryContent.innerHTML = '<p>Please select your dates and details to see a summary of your booking.</p>';
+                                    }
+                                    
+                                    // Hide success message and restore form buttons
+                                    successMessage.style.display = 'none';
+                                    if (formButtons) {
+                                        formButtons.style.display = 'flex';
+                                    }
+                                    
+                                    // Remove the button
+                                    newBookingBtn.remove();
+                                });
+                            }
                             
                             // Scroll to success message
                             successMessage.scrollIntoView({ behavior: 'smooth' });
-                            
-                            // Hide success message after 5 seconds
-                            setTimeout(() => {
-                                successMessage.style.display = 'none';
-                            }, 5000);
                         } else {
-                            alert('Thank you for your booking request! We\'ll be in touch soon.');
-                        }
-                        
-                        // Reset form
-                        bookingForm.reset();
-                        
-                        // Go back to first step
-                        formSteps.forEach(step => step.classList.remove('active'));
-                        formSteps[0].classList.add('active');
-                        
-                        // Clear summary
-                        if (summaryContent) {
-                            summaryContent.innerHTML = '<p>Please select your dates and details to see a summary of your booking.</p>';
+                            alert('Thank you for your booking request! Your booking has been submitted. We will call and email you shortly to confirm your booking details.');
+                            
+                            // Reset form only after alert is dismissed
+                            bookingForm.reset();
+                            
+                            // Go back to first step
+                            formSteps.forEach(step => step.classList.remove('active'));
+                            formSteps[0].classList.add('active');
+                            
+                            // Clear summary
+                            if (summaryContent) {
+                                summaryContent.innerHTML = '<p>Please select your dates and details to see a summary of your booking.</p>';
+                            }
                         }
                     } else {
                         throw new Error('Form submission failed');
@@ -680,19 +665,48 @@ function initContactForm() {
                 })
                 .then(response => {
                     if (response.ok) {
+                        // Get submit button to hide it
+                        const submitButton = contactForm.querySelector('button[type="submit"]');
+                        if (submitButton) {
+                            submitButton.style.display = 'none';
+                        }
+                        
                         // Show success message
-                        contactForm.reset();
-                        document.getElementById('form-success-message').style.display = 'block';
+                        const successMessage = document.getElementById('form-success-message');
+                        successMessage.style.display = 'block';
                         
-                        // Reset quantity fields display
-                        document.querySelectorAll('.quantity-group').forEach(group => {
-                            group.style.display = 'none';
-                        });
+                        // Add a "New Request" button to the success message
+                        if (!document.getElementById('new-request-btn')) {
+                            const newRequestBtn = document.createElement('button');
+                            newRequestBtn.id = 'new-request-btn';
+                            newRequestBtn.className = 'btn btn-primary';
+                            newRequestBtn.textContent = 'Make Another Request';
+                            newRequestBtn.style.marginTop = '15px';
+                            successMessage.appendChild(newRequestBtn);
+                            
+                            // Add event listener to reset form when button is clicked
+                            newRequestBtn.addEventListener('click', function() {
+                                // Reset form
+                                contactForm.reset();
+                                
+                                // Reset quantity fields display
+                                document.querySelectorAll('.quantity-group').forEach(group => {
+                                    group.style.display = 'none';
+                                });
+                                
+                                // Hide success message and restore submit button
+                                successMessage.style.display = 'none';
+                                if (submitButton) {
+                                    submitButton.style.display = 'block';
+                                }
+                                
+                                // Remove the button
+                                newRequestBtn.remove();
+                            });
+                        }
                         
-                        // Hide success message after 5 seconds
-                        setTimeout(() => {
-                            document.getElementById('form-success-message').style.display = 'none';
-                        }, 5000);
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
                     } else {
                         throw new Error('Form submission failed');
                     }
