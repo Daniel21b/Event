@@ -84,7 +84,12 @@
                         <div class="price">
                             <span class="currency">$</span>
                             <span class="amount">150</span>
-                            <span class="period">/ 24hr</span>
+                            <span class="period">/ 24hr (10x30)</span>
+                        </div>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">350</span>
+                            <span class="period">/ 24hr (20x40)</span>
                         </div>
                     </a>
                     
@@ -143,10 +148,18 @@
                     </div>
                 
                     <div id="gallery-tents" class="gallery-item" data-category="tents">
-                        <img src="img/tents/10X30 tent.png" alt="Event Tents">
+                        <img src="img/tents/10X30 tent.png" alt="10x30 Event Tent">
                         <div class="gallery-item-overlay">
-                            <h3>Event Tents</h3>
-                            <p>Spacious tents for outdoor events</p>
+                            <h3>10x30 Event Tent</h3>
+                            <p>Perfect for medium-sized gatherings</p>
+                        </div>
+                    </div>
+                
+                    <div class="gallery-item" data-category="tents">
+                        <img src="img/tents/20*40tent.jpg" alt="20x40 Large Event Tent">
+                        <div class="gallery-item-overlay">
+                            <h3>20x40 Large Event Tent</h3>
+                            <p>Premium large tent for major events and celebrations</p>
                         </div>
                     </div>
                 
@@ -209,7 +222,8 @@
                                         <option value="chairs-covered">Chairs with Covers</option>
                                         <option value="tables-rect">Rectangular Tables</option>
                                         <option value="tables-round">Round Tables</option>
-                                        <option value="tents">Tents</option>
+                                        <option value="tents-10x30">10x30 Tent</option>
+                                        <option value="tents-20x40">20x40 Large Tent</option>
                                         <option value="backdrops">Backdrops</option>
                                         <option value="decorations">Other Decorations</option>
                                     </select>
@@ -441,8 +455,12 @@
                                         <label for="tables">Tables</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="tents" name="rental-items" value="Tents">
-                                        <label for="tents">Tents</label>
+                                        <input type="checkbox" id="tents-10x30" name="rental-items" value="10x30 Tent">
+                                        <label for="tents-10x30">10x30 Tent</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tents-20x40" name="rental-items" value="20x40 Large Tent">
+                                        <label for="tents-20x40">20x40 Large Tent</label>
                                     </div>
                                     <div class="checkbox-item">
                                         <input type="checkbox" id="arc-set" name="rental-items" value="Two-piece arc set">
@@ -458,9 +476,13 @@
                                 <label for="tables-quantity">Number of Tables</label>
                                 <input type="number" id="tables-quantity" name="tables-quantity" min="1" value="1">
                             </div>
-                            <div class="form-group quantity-group" id="tents-quantity-group" style="display:none;">
-                                <label for="tents-quantity">Number of Tents</label>
-                                <input type="number" id="tents-quantity" name="tents-quantity" min="1" value="1">
+                            <div class="form-group quantity-group" id="tents-10x30-quantity-group" style="display:none;">
+                                <label for="tents-10x30-quantity">Number of 10x30 Tents</label>
+                                <input type="number" id="tents-10x30-quantity" name="tents-10x30-quantity" min="1" value="1">
+                            </div>
+                            <div class="form-group quantity-group" id="tents-20x40-quantity-group" style="display:none;">
+                                <label for="tents-20x40-quantity">Number of 20x40 Tents</label>
+                                <input type="number" id="tents-20x40-quantity" name="tents-20x40-quantity" min="1" value="1">
                             </div>
                             <div class="form-group quantity-group" id="arc-set-quantity-group" style="display:none;">
                                 <label for="arc-set-quantity">Number of Arc Sets</label>
