@@ -1300,4 +1300,72 @@ html {
     margin-left: 4px;
 }
 
+/* ===== REVIEW LINK ===== */
+.review-link {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-accent));
+    color: var(--color-white);
+    padding: 15px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: var(--shadow-medium);
+    transition: all var(--transition-medium);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.review-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    color: var(--color-white);
+    background: linear-gradient(135deg, var(--color-accent), var(--color-gold));
+}
+
+.review-link:active {
+    transform: translateY(-1px);
+}
+
+.review-link i {
+    font-size: 1.1rem;
+    color: var(--color-white);
+}
+
+.review-text {
+    white-space: nowrap;
+}
+
+/* Responsive design for review link */
+@media (max-width: 768px) {
+    .review-link {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .review-text {
+        display: none;
+    }
+    
+    .review-link i {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .review-link {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 14px;
+    }
+}
+
 
