@@ -1312,7 +1312,7 @@ html {
     text-decoration: none;
     box-shadow: var(--shadow-medium);
     transition: all var(--transition-medium);
-    z-index: 999;
+    z-index: 9999;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1320,6 +1320,11 @@ html {
     font-size: 0.95rem;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.2);
+    /* Ensure visibility on all devices */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .review-link:hover {
@@ -1349,6 +1354,12 @@ html {
         right: 20px;
         padding: 12px 16px;
         font-size: 0.9rem;
+        /* Ensure visibility on mobile */
+        z-index: 9999 !important;
+        position: fixed !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
     .review-text {
@@ -1365,7 +1376,21 @@ html {
         bottom: 15px;
         right: 15px;
         padding: 10px 14px;
+        /* Ensure visibility on small mobile */
+        z-index: 9999 !important;
+        position: fixed !important;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
 
-
+/* Force review link visibility on all devices - final fallback */
+.review-link {
+    z-index: 9999 !important;
+    position: fixed !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}

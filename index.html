@@ -574,6 +574,20 @@
     <script src="js/main.js"></script>
     <script src="js/calendar.js"></script>
     <script>
+        // Ensure review link is always visible
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewLink = document.querySelector('.review-link');
+            if (reviewLink) {
+                reviewLink.style.zIndex = '9999';
+                reviewLink.style.position = 'fixed';
+                reviewLink.style.display = 'flex';
+                reviewLink.style.visibility = 'visible';
+                reviewLink.style.opacity = '1';
+                reviewLink.style.pointerEvents = 'auto';
+            }
+        });
+    </script>
+    <script>
   function filterGallery(category) {
     // Trigger the filter button click for the specified category
     const filterBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
