@@ -83,6 +83,11 @@
                         <h3>Tents</h3>
                         <div class="price">
                             <span class="currency">$</span>
+                            <span class="amount">100</span>
+                            <span class="period">/ 24hr (10x20)</span>
+                        </div>
+                        <div class="price">
+                            <span class="currency">$</span>
                             <span class="amount">150</span>
                             <span class="period">/ 24hr (10x30)</span>
                         </div>
@@ -156,6 +161,14 @@
                     </div>
                 
                     <div class="gallery-item" data-category="tents">
+                        <img src="img/tents/10*20tent.jpg" alt="10x20 Event Tent">
+                        <div class="gallery-item-overlay">
+                            <h3>10x20 Event Tent</h3>
+                            <p>Compact tent perfect for intimate gatherings and small events</p>
+                        </div>
+                    </div>
+                
+                    <div class="gallery-item" data-category="tents">
                         <img src="img/tents/20*40tent.jpg" alt="20x40 Large Event Tent">
                         <div class="gallery-item-overlay">
                             <h3>20x40 Large Event Tent</h3>
@@ -222,6 +235,7 @@
                                         <option value="chairs-covered">Chairs with Covers</option>
                                         <option value="tables-rect">Rectangular Tables</option>
                                         <option value="tables-round">Round Tables</option>
+                                        <option value="tents-10x20">10x20 Tent</option>
                                         <option value="tents-10x30">10x30 Tent</option>
                                         <option value="tents-20x40">20x40 Large Tent</option>
                                         <option value="backdrops">Backdrops</option>
@@ -455,6 +469,10 @@
                                         <label for="tables">Tables</label>
                                     </div>
                                     <div class="checkbox-item">
+                                        <input type="checkbox" id="tents-10x20" name="rental-items" value="10x20 Tent">
+                                        <label for="tents-10x20">10x20 Tent</label>
+                                    </div>
+                                    <div class="checkbox-item">
                                         <input type="checkbox" id="tents-10x30" name="rental-items" value="10x30 Tent">
                                         <label for="tents-10x30">10x30 Tent</label>
                                     </div>
@@ -475,6 +493,10 @@
                             <div class="form-group quantity-group" id="tables-quantity-group" style="display:none;">
                                 <label for="tables-quantity">Number of Tables</label>
                                 <input type="number" id="tables-quantity" name="tables-quantity" min="1" value="1">
+                            </div>
+                            <div class="form-group quantity-group" id="tents-10x20-quantity-group" style="display:none;">
+                                <label for="tents-10x20-quantity">Number of 10x20 Tents</label>
+                                <input type="number" id="tents-10x20-quantity" name="tents-10x20-quantity" min="1" value="1">
                             </div>
                             <div class="form-group quantity-group" id="tents-10x30-quantity-group" style="display:none;">
                                 <label for="tents-10x30-quantity">Number of 10x30 Tents</label>
