@@ -6,6 +6,7 @@
     <title>Book Your Chairs | Yalem Company Rentals</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="css/checkout.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +32,12 @@
                 <li><a href="index.html#pricing">Pricing</a></li>
                 <li><a href="#" class="active">Book Now</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link" id="nav-cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cart-badge">0</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -266,6 +273,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
     <script src="js/booking.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+        });
+    </script>
 </body>
 </html> 

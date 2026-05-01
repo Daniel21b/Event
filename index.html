@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yalem Event Rentals | Premium Event Rentals</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
     <link rel="stylesheet" href="css/calendar.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +30,12 @@
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#booking">Book Now</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link" id="nav-cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cart-badge">0</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -593,12 +600,14 @@
     </a>
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
     <script src="js/calendar.js"></script>
     <script>
-        // Ensure review link is always visible
+        // Ensure review link is always visible + update cart badge
         document.addEventListener('DOMContentLoaded', function() {
-            const reviewLink = document.querySelector('.review-link');
+            var reviewLink = document.querySelector('.review-link');
             if (reviewLink) {
                 reviewLink.style.zIndex = '9999';
                 reviewLink.style.position = 'fixed';
@@ -607,6 +616,7 @@
                 reviewLink.style.opacity = '1';
                 reviewLink.style.pointerEvents = 'auto';
             }
+            updateCartBadge();
         });
     </script>
     <script>

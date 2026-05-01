@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed — Yalem Event Rentals</title>
+    <meta name="description" content="Your rental booking with Yalem Event Rentals has been confirmed. Thank you for choosing us!">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Yalem Event Rentals</h1>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link" id="nav-cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="success-page">
+        <div class="confirmation-wrapper">
+            <div class="confirmation-card">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h1>Deposit Received!</h1>
+                <p>Thank you for booking with Yalem Event Rentals.</p>
+                <p>Your 50% booking deposit and damage waiver have been processed. A confirmation email has been sent to your email address.</p>
+                <p>The remaining balance will be collected <strong>14 days before your event</strong>. Our team will contact you within 24 hours to finalize your event details.</p>
+                <div class="confirmation-reference" id="confirmation-reference" style="display:none;"></div>
+                <br>
+                <a href="index.html" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Yalem Event Rentals</h2>
+                    <p>Premium event rentals for your special occasions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="index.html#gallery">Gallery</a></li>
+                            <li><a href="booking.html">Book Now</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Information</h3>
+                        <ul>
+                            <li><a href="index.html#faq">FAQ</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="index.html#contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yalem Event Rentals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Clear cart after successful payment
+            Cart.clear();
+            updateCartBadge();
+
+            // Display truncated session reference from URL
+            var params = new URLSearchParams(window.location.search);
+            var sessionId = params.get('session_id');
+            var refEl = document.getElementById('confirmation-reference');
+            if (sessionId && refEl) {
+                refEl.textContent = 'Ref: ' + sessionId.slice(-8).toUpperCase();
+                refEl.style.display = 'inline-block';
+            }
+
+            // Mobile nav toggle
+            var menuToggle = document.querySelector('.menu-toggle');
+            var navLinks = document.querySelector('.nav-links');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

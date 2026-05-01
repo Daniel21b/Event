@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Yalem Event Rentals</title>
+    <meta name="description" content="Review your rental order and securely checkout with Yalem Event Rentals. Premium chairs, tables, tents, and decorations for the DMV area.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Yalem Event Rentals</h1>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#gallery">Gallery</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li>
+                    <a href="checkout.html" class="cart-link active" id="nav-cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="checkout-page">
+        <div class="container">
+            <div class="checkout-header">
+                <h1 class="section-title">Checkout</h1>
+                <p>Review your order and complete your booking</p>
+            </div>
+
+            <div class="checkout-wrapper">
+                <!-- Left Column: Order Summary -->
+                <section class="order-summary" id="order-summary-section">
+                    <h2>Your Order</h2>
+                    <div id="line-items-container">
+                        <!-- Populated by checkout.js -->
+                    </div>
+                    <div class="order-total" id="order-total-row" style="display:none;">
+                        <span class="order-total-label">Total</span>
+                        <span class="order-total-amount" id="order-total-display">$0.00</span>
+                    </div>
+
+                    <!-- Deposit Breakdown (populated by checkout.js) -->
+                    <div class="deposit-breakdown" id="deposit-breakdown" style="display:none;">
+                        <div class="breakdown-row">
+                            <span>Rental Subtotal</span>
+                            <span id="breakdown-subtotal">$0.00</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Booking Deposit (50%)</span>
+                            <span id="breakdown-deposit">$0.00</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Damage Waiver (10%)</span>
+                            <span id="breakdown-waiver">$0.00</span>
+                        </div>
+                        <div class="breakdown-row breakdown-today">
+                            <span><strong>Due Today</strong></span>
+                            <span class="today-amount" id="breakdown-today"><strong>$0.00</strong></span>
+                        </div>
+                        <div class="breakdown-row breakdown-balance-row">
+                            <span>Balance Due Before Event</span>
+                            <span id="breakdown-balance">$0.00</span>
+                        </div>
+                        <p class="breakdown-note">
+                            <i class="fas fa-info-circle"></i>
+                            50% non-refundable deposit secures your date. Remaining balance due 14 days before your event.
+                        </p>
+                    </div>
+
+                    <a href="index.html#services" class="continue-shopping">
+                        <i class="fas fa-arrow-left"></i> Continue Shopping
+                    </a>
+                </section>
+
+                <!-- Right Column: Event Details + Pay Button -->
+                <section class="checkout-form-panel" id="checkout-form-panel">
+                    <h2>Event Details</h2>
+                    <form id="checkout-details-form" class="checkout-form" novalidate>
+                        <div class="form-group">
+                            <label for="customer-name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="customer-name" name="customer-name" placeholder="Your full name" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customer-email">Email <span class="required">*</span></label>
+                            <input type="email" id="customer-email" name="customer-email" placeholder="you@example.com" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customer-phone">Phone</label>
+                            <input type="tel" id="customer-phone" name="customer-phone" placeholder="(202) 555-0100">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-date">Event Date <span class="required">*</span></label>
+                            <input type="date" id="event-date" name="event-date" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="delivery-address">Delivery Address</label>
+                            <textarea id="delivery-address" name="delivery-address" placeholder="Street, City, State, ZIP" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" id="pay-btn" class="btn btn-primary btn-large" disabled>
+                            <span class="btn-label">Proceed to Secure Payment</span>
+                            <span class="btn-spinner"></span>
+                        </button>
+                        <p class="secure-note">
+                            <i class="fas fa-lock"></i> Secured by Stripe — your card details never touch our servers
+                        </p>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Yalem Event Rentals</h2>
+                    <p>Premium event rentals for your special occasions</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="index.html#gallery">Gallery</a></li>
+                            <li><a href="booking.html">Book Now</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Information</h3>
+                        <ul>
+                            <li><a href="index.html#faq">FAQ</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="index.html#contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yalem Event Rentals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+    <script>
+        // Mobile nav toggle (same as main.js)
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuToggle = document.querySelector('.menu-toggle');
+            var navLinks = document.querySelector('.nav-links');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

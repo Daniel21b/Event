@@ -1,0 +1,9 @@
+{
+  "name": "yalem-event-rentals",
+  "private": true,
+  "type": "module",
+  "description": "Yalem Event Rentals — premium event rental service with Stripe checkout",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}
