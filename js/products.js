@@ -120,3 +120,8 @@ const PRODUCTS = {
 function formatPrice(cents) {
   return "$" + (cents / 100).toFixed(2);
 }
+
+// Make it available to Node.js for backend validation
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = PRODUCTS;
+}

@@ -62,25 +62,59 @@ function initNavigation() {
 }
 
 /**
+ * Render the product catalog dynamically from PRODUCTS
+ */
+function renderProductCatalog() {
+    const galleryGrid = document.getElementById('product-gallery-grid');
+    if (!galleryGrid) return;
+    
+    if (typeof PRODUCTS === 'undefined') {
+        console.error("PRODUCTS is not defined. Ensure products.js is loaded.");
+        return;
+    }
+
+    let html = '';
+    Object.values(PRODUCTS).forEach(product => {
+        html += `
+            <div class="gallery-item product-card" data-category="${product.category}">
+                <img src="${product.image}" alt="${product.name}">
+                <div class="gallery-item-overlay">
+                    <h3>${product.name}</h3>
+                    <p class="product-price">$${(product.unitAmount / 100).toFixed(2)}</p>
+                    <button type="button" class="btn btn-primary btn-add-to-cart" data-id="${product.id}">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    galleryGrid.innerHTML = html;
+
+    // Attach Add to Cart event listeners
+    const addBtns = galleryGrid.querySelectorAll('.btn-add-to-cart');
+    addBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // prevent lightbox if we implement it
+            const productId = this.getAttribute('data-id');
+            if (typeof Cart !== 'undefined') {
+                Cart.add(productId, 1);
+                if (typeof updateCartBadge === 'function') updateCartBadge();
+                if (typeof showCartToast === 'function') showCartToast(PRODUCTS[productId].name + " added to cart");
+            }
+        });
+    });
+}
+
+/**
  * Gallery functionality
  */
 function initGallery() {
+    renderProductCatalog();
+
     // Gallery filtering
-    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryItems = document.querySelectorAll('#product-gallery-grid .gallery-item');
     const filterButtons = document.querySelectorAll('.filter-btn');
-    
-    // Print all image paths to console for debugging
-    console.log("Gallery images paths:");
-    galleryItems.forEach(item => {
-        const img = item.querySelector('img');
-        if (img) {
-            console.log(img.src);
-            
-            // Add more detailed folder structure logging
-            const pathParts = img.src.split('/');
-            console.log('Image folder structure:', pathParts);
-        }
-    });
     
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -90,77 +124,15 @@ function initGallery() {
             button.classList.add('active');
             
             const filterValue = button.getAttribute('data-filter');
-            console.log("Selected filter:", filterValue);
             
-            // Create an array from gallery items to sort them
-            const itemsArray = Array.from(galleryItems);
-            
-            // Sort items by the image filename
-            itemsArray.sort((a, b) => {
-                const imgA = a.querySelector('img').src.split('/').pop();
-                const imgB = b.querySelector('img').src.split('/').pop();
-                return imgA.localeCompare(imgB);
-            });
-            
-            // Filter and display items
-            itemsArray.forEach(item => {
-                const imgSrc = item.querySelector('img').src.toLowerCase();
-                
-                // Special debug info for chair images
-                if (imgSrc.includes('chair')) {
-                    console.log('FOUND CHAIR IMAGE: ' + imgSrc);
-                    console.log('Full path parts:', imgSrc.split('/'));
-                    console.log('Is in chairs folder: ' + imgSrc.includes('/chairs/'));
-                    console.log('Is in chair folder: ' + imgSrc.includes('/chair/'));
-                    console.log('Has table in name: ' + imgSrc.includes('table'));
-                    console.log('Has cover in name: ' + imgSrc.includes('cover'));
-                }
-                
+            galleryItems.forEach(item => {
                 if (filterValue === 'all') {
                     item.style.display = 'block';
-                } 
-                else if (filterValue === 'chairs') {
-                    // Expanded chair filtering to handle both singular and plural folder names
-                    const isInChairsFolder = imgSrc.includes('/chairs/') || imgSrc.includes('/chairs/') || imgSrc.includes('/images/chair/');
-                    const isTableImage = imgSrc.includes('table');
-                    item.style.display = (isInChairsFolder && !isTableImage) ? 'block' : 'none';
-                    
-                    console.log(`Chair Filter: ${imgSrc} - ${item.style.display}`);
-                } 
-                else if (filterValue === 'tables') {
-                    const isInTableFolder = imgSrc.includes('/table/') || imgSrc.includes('/tables/');
-                    const isTableInChairsFolder = (imgSrc.includes('/chairs/') || imgSrc.includes('/chair/')) && imgSrc.includes('table');
-                    item.style.display = (isInTableFolder || isTableInChairsFolder) ? 'block' : 'none';
+                } else {
+                    const itemCategory = item.getAttribute('data-category');
+                    item.style.display = (itemCategory === filterValue) ? 'block' : 'none';
                 }
-                else if (filterValue === 'tents') {
-                    // For tents category
-                    const isInTentsFolder = imgSrc.includes('/tents/') || imgSrc.includes('/tent/');
-                    const hasTentInName = imgSrc.includes('tent');
-                    item.style.display = (isInTentsFolder || hasTentInName) ? 'block' : 'none';
-                }
-                else if (filterValue === 'backdrops') {
-                    // For backdrops category
-                    const isInBackdropsFolder = imgSrc.includes('/backdrops/') || imgSrc.includes('/backdrop/');
-                    const hasBackdropInName = imgSrc.includes('backdrop') || imgSrc.includes('decor');
-                    item.style.display = (isInBackdropsFolder || hasBackdropInName) ? 'block' : 'none';
-                }
-                else {
-                    item.style.display = 'none';
-                }
-                
-                // Log which items are being displayed for debugging
-                console.log(`Item ${imgSrc} display: ${item.style.display}`);
             });
-            
-            // Re-order the items in the DOM based on the sorted array
-            const galleryGrid = document.querySelector('.gallery-grid');
-            if (galleryGrid) {
-                itemsArray.forEach(item => {
-                    if (item.style.display === 'block') {
-                        galleryGrid.appendChild(item);
-                    }
-                });
-            }
         });
     });
     
@@ -172,18 +144,21 @@ function initGallery() {
     const lightboxPrev = document.querySelector('.lightbox-prev');
     const lightboxNext = document.querySelector('.lightbox-next');
     
+    if (!galleryLightbox) return;
+
     let currentImageIndex = 0;
     const visibleGalleryItems = () => Array.from(galleryItems).filter(item => item.style.display !== 'none');
     
-    // Open lightbox when clicking on gallery item
+    // Open lightbox when clicking on gallery item (excluding the add to cart button)
     galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-add-to-cart')) return;
+
             const img = this.querySelector('img');
             const title = this.querySelector('h3').textContent;
-            const desc = this.querySelector('p').textContent;
             
             lightboxImage.src = img.src;
-            lightboxCaption.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
+            lightboxCaption.innerHTML = `<h3>${title}</h3>`;
             galleryLightbox.classList.add('active');
             
             // Set current image index
@@ -203,6 +178,7 @@ function initGallery() {
     // Navigate to previous image
     lightboxPrev.addEventListener('click', function() {
         const visibleItems = visibleGalleryItems();
+        if (visibleItems.length === 0) return;
         currentImageIndex = (currentImageIndex - 1 + visibleItems.length) % visibleItems.length;
         updateLightboxContent(visibleItems[currentImageIndex]);
         updateNavigation();
@@ -211,6 +187,7 @@ function initGallery() {
     // Navigate to next image
     lightboxNext.addEventListener('click', function() {
         const visibleItems = visibleGalleryItems();
+        if (visibleItems.length === 0) return;
         currentImageIndex = (currentImageIndex + 1) % visibleItems.length;
         updateLightboxContent(visibleItems[currentImageIndex]);
         updateNavigation();
@@ -220,10 +197,9 @@ function initGallery() {
     function updateLightboxContent(item) {
         const img = item.querySelector('img');
         const title = item.querySelector('h3').textContent;
-        const desc = item.querySelector('p').textContent;
         
         lightboxImage.src = img.src;
-        lightboxCaption.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
+        lightboxCaption.innerHTML = `<h3>${title}</h3>`;
     }
     
     // Update navigation visibility

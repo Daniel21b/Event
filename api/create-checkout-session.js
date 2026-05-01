@@ -1,8 +1,23 @@
 import Stripe from "stripe";
+import fs from "fs";
+import path from "path";
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const DEPOSIT_RATE = 0.50;       // 50% non-refundable booking deposit
 const DAMAGE_WAIVER_RATE = 0.10; // 10% damage waiver
+
+// Load canonical products catalog to enforce pricing
+const productsPath = path.join(process.cwd(), "js", "products.js");
+let PRODUCTS = {};
+try {
+  const productsCode = fs.readFileSync(productsPath, "utf8");
+  // Extract just the PRODUCTS object definition
+  const evalCode = productsCode + "; return PRODUCTS;";
+  PRODUCTS = new Function(evalCode)();
+} catch (err) {
+  console.error("Failed to load canonical product catalog:", err);
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
@@ -26,18 +41,37 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Name and email are required" });
     }
 
-    // Calculate order total from line items (cents)
-    const orderTotal = lineItems.reduce(
-      (sum, item) => sum + item.unitAmount * item.quantity,
-      0
-    );
+    // Server-side Price Validation!
+    // Never trust client-provided unitAmounts. Always look up from PRODUCTS.
+    let orderTotal = 0;
+    const validatedLineItems = [];
+
+    for (const item of lineItems) {
+      const canonicalProduct = PRODUCTS[item.id];
+      if (!canonicalProduct) {
+        return res.status(400).json({ error: `Invalid product in cart: ${item.id}` });
+      }
+
+      // Reconstruct trusted item
+      const unitAmount = canonicalProduct.unitAmount;
+      const quantity = item.quantity;
+      
+      orderTotal += unitAmount * quantity;
+      
+      validatedLineItems.push({
+        id: canonicalProduct.id,
+        name: canonicalProduct.name,
+        quantity: quantity,
+        unitAmount: unitAmount
+      });
+    }
 
     const depositAmount = Math.round(orderTotal * DEPOSIT_RATE);
     const damageWaiver = Math.round(orderTotal * DAMAGE_WAIVER_RATE);
     const balanceDue = orderTotal - depositAmount;
 
     // Build a human-readable summary of the rental items for metadata
-    const itemsSummary = lineItems
+    const itemsSummary = validatedLineItems
       .map((item) => `${item.name} ×${item.quantity}`)
       .join(", ");
 
