@@ -86,7 +86,7 @@ function renderOrderSummary() {
       "</div>" +
       '<div class="qty-control">' +
       '<button type="button" class="qty-btn qty-minus" data-id="' + id + '" aria-label="Decrease quantity">−</button>' +
-      '<span class="qty-value">' + qty + "</span>" +
+      '<input type="number" class="qty-value qty-input" data-id="' + id + '" value="' + qty + '" min="1" step="1" aria-label="Quantity for ' + product.name + '">' +
       '<button type="button" class="qty-btn qty-plus" data-id="' + id + '" aria-label="Increase quantity">+</button>' +
       "</div>" +
       '<span class="line-item-subtotal">' + formatPrice(subtotal) + "</span>" +
@@ -160,6 +160,18 @@ function attachCartHandlers() {
       renderOrderSummary();
       updateCartBadge();
       showCartToast("Item removed from order");
+    });
+  }
+
+  var qtyInputs = document.querySelectorAll(".qty-input");
+  for (var i = 0; i < qtyInputs.length; i++) {
+    qtyInputs[i].addEventListener("change", function () {
+      var id = this.getAttribute("data-id");
+      var qty = parseInt(this.value, 10);
+      if (!qty || qty < 1) qty = 1;
+      Cart.update(id, qty);
+      renderOrderSummary();
+      updateCartBadge();
     });
   }
 }

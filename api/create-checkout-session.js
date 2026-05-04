@@ -23,6 +23,10 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   try {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return res.status(500).json({ error: "Stripe is not configured" });
+    }
+
     const {
       lineItems,
       customerEmail,
@@ -52,9 +56,12 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: `Invalid product in cart: ${item.id}` });
       }
 
-      // Reconstruct trusted item
       const unitAmount = canonicalProduct.unitAmount;
-      const quantity = item.quantity;
+      const quantity = parseInt(item.quantity, 10);
+
+      if (!quantity || quantity < 1) {
+        return res.status(400).json({ error: `Invalid quantity for product: ${item.id}` });
+      }
       
       orderTotal += unitAmount * quantity;
       
@@ -68,6 +75,7 @@ export default async function handler(req, res) {
 
     const depositAmount = Math.round(orderTotal * DEPOSIT_RATE);
     const damageWaiver = Math.round(orderTotal * DAMAGE_WAIVER_RATE);
+    const todayTotal = depositAmount + damageWaiver;
     const balanceDue = orderTotal - depositAmount;
 
     // Build a human-readable summary of the rental items for metadata
@@ -89,20 +97,10 @@ export default async function handler(req, res) {
         {
           price_data: {
             currency: "usd",
-            unit_amount: depositAmount,
+            unit_amount: todayTotal,
             product_data: {
-              name: "Booking Deposit (50% — non-refundable)",
-              description: itemsSummary
-            }
-          },
-          quantity: 1
-        },
-        {
-          price_data: {
-            currency: "usd",
-            unit_amount: damageWaiver,
-            product_data: {
-              name: "Damage Waiver (non-refundable)"
+              name: "Booking Payment Due Today",
+              description: `Includes 50% non-refundable booking deposit and 10% damage waiver. Items: ${itemsSummary}`
             }
           },
           quantity: 1
@@ -116,6 +114,7 @@ export default async function handler(req, res) {
         orderTotal: String(orderTotal),
         depositAmount: String(depositAmount),
         damageWaiver: String(damageWaiver),
+        todayTotal: String(todayTotal),
         balanceDue: String(balanceDue),
         itemsSummary,
         source: "yalem-website"
@@ -133,7 +132,7 @@ export default async function handler(req, res) {
         depositAmount,
         damageWaiver,
         balanceDue,
-        todayTotal: depositAmount + damageWaiver
+        todayTotal
       }
     });
   } catch (err) {

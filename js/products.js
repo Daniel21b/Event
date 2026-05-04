@@ -11,7 +11,7 @@ const PRODUCTS = {
   "chiavari-gold": {
     id: "chiavari-gold",
     name: "Chiavari Chair – Gold",
-    unitAmount: 1200,       // $12.00
+    unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chairs.png",
     category: "chairs"
@@ -19,7 +19,7 @@ const PRODUCTS = {
   "chiavari-silver": {
     id: "chiavari-silver",
     name: "Chiavari Chair – Silver",
-    unitAmount: 1200,       // $12.00
+    unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chair2.png",
     category: "chairs"
@@ -27,7 +27,7 @@ const PRODUCTS = {
   "ghost-chair": {
     id: "ghost-chair",
     name: "Ghost / Clear Chair",
-    unitAmount: 1800,       // $18.00
+    unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chairs.png",
     category: "chairs"
@@ -35,7 +35,7 @@ const PRODUCTS = {
   "cross-back": {
     id: "cross-back",
     name: "Cross-Back Wooden Chair",
-    unitAmount: 1500,       // $15.00
+    unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chair2.png",
     category: "chairs"
@@ -43,7 +43,7 @@ const PRODUCTS = {
   "folding-white": {
     id: "folding-white",
     name: "Luxury Folding Chair – White",
-    unitAmount: 800,        // $8.00
+    unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chairs.png",
     category: "chairs"
@@ -51,9 +51,17 @@ const PRODUCTS = {
   "folding-black": {
     id: "folding-black",
     name: "Luxury Folding Chair – Black",
-    unitAmount: 800,        // $8.00
+    unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chair2.png",
+    category: "chairs"
+  },
+  "chair-with-cover": {
+    id: "chair-with-cover",
+    name: "Chair with Cover",
+    unitAmount: 250,        // $2.50
+    currency: "usd",
+    image: "img/chairs/chairs.png",
     category: "chairs"
   },
 
