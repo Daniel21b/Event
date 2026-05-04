@@ -75,6 +75,7 @@ function renderOrderSummary() {
     if (!product) continue;
 
     var subtotal = product.unitAmount * qty;
+    var minQty = product.minimumQuantity || 1;
     grandTotal += subtotal;
 
     html +=
@@ -86,7 +87,7 @@ function renderOrderSummary() {
       "</div>" +
       '<div class="qty-control">' +
       '<button type="button" class="qty-btn qty-minus" data-id="' + id + '" aria-label="Decrease quantity">−</button>' +
-      '<input type="number" class="qty-value qty-input" data-id="' + id + '" value="' + qty + '" min="1" step="1" aria-label="Quantity for ' + product.name + '">' +
+      '<input type="number" class="qty-value qty-input" data-id="' + id + '" value="' + qty + '" min="' + minQty + '" step="1" aria-label="Quantity for ' + product.name + '">' +
       '<button type="button" class="qty-btn qty-plus" data-id="' + id + '" aria-label="Increase quantity">+</button>' +
       "</div>" +
       '<span class="line-item-subtotal">' + formatPrice(subtotal) + "</span>" +
@@ -130,7 +131,9 @@ function attachCartHandlers() {
       var id = this.getAttribute("data-id");
       var cart = Cart.get();
       var newQty = (cart[id] || 1) - 1;
-      if (newQty <= 0) {
+      var product = PRODUCTS[id];
+      var minQty = product && product.minimumQuantity ? product.minimumQuantity : 1;
+      if (newQty < minQty) {
         Cart.remove(id);
       } else {
         Cart.update(id, newQty);
@@ -168,7 +171,9 @@ function attachCartHandlers() {
     qtyInputs[i].addEventListener("change", function () {
       var id = this.getAttribute("data-id");
       var qty = parseInt(this.value, 10);
-      if (!qty || qty < 1) qty = 1;
+      var product = PRODUCTS[id];
+      var minQty = product && product.minimumQuantity ? product.minimumQuantity : 1;
+      if (!qty || qty < minQty) qty = minQty;
       Cart.update(id, qty);
       renderOrderSummary();
       updateCartBadge();

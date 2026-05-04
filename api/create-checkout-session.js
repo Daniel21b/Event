@@ -2,8 +2,6 @@ import Stripe from "stripe";
 import fs from "fs";
 import path from "path";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
 const DEPOSIT_RATE = 0.50;       // 50% non-refundable booking deposit
 const DAMAGE_WAIVER_RATE = 0.10; // 10% damage waiver
 
@@ -26,6 +24,8 @@ export default async function handler(req, res) {
     if (!process.env.STRIPE_SECRET_KEY) {
       return res.status(500).json({ error: "Stripe is not configured" });
     }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
     const {
       lineItems,

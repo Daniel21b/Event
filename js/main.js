@@ -75,12 +75,19 @@ function renderProductCatalog() {
 
     let html = '';
     Object.values(PRODUCTS).forEach(product => {
+        const minQty = product.minimumQuantity || 1;
         html += `
             <div class="gallery-item product-card" data-category="${product.category}">
                 <img src="${product.image}" alt="${product.name}">
                 <div class="gallery-item-overlay">
                     <h3>${product.name}</h3>
                     <p class="product-price">$${(product.unitAmount / 100).toFixed(2)}</p>
+                    ${minQty > 1 ? `<p class="product-minimum">Minimum rental: ${minQty}</p>` : ''}
+                    <div class="product-qty-control">
+                        <button type="button" class="product-qty-btn product-qty-minus" data-id="${product.id}" aria-label="Decrease ${product.name} quantity">−</button>
+                        <input type="number" class="product-qty-input" data-id="${product.id}" value="${minQty}" min="${minQty}" step="1" aria-label="${product.name} quantity">
+                        <button type="button" class="product-qty-btn product-qty-plus" data-id="${product.id}" aria-label="Increase ${product.name} quantity">+</button>
+                    </div>
                     <button type="button" class="btn btn-primary btn-add-to-cart" data-id="${product.id}">
                         Add to Cart
                     </button>
@@ -91,16 +98,51 @@ function renderProductCatalog() {
     
     galleryGrid.innerHTML = html;
 
+    const qtyControls = galleryGrid.querySelectorAll('.product-qty-control');
+    qtyControls.forEach(control => {
+        const input = control.querySelector('.product-qty-input');
+        const minusBtn = control.querySelector('.product-qty-minus');
+        const plusBtn = control.querySelector('.product-qty-plus');
+
+        minusBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const productId = input.getAttribute('data-id');
+            const minQty = PRODUCTS[productId] && PRODUCTS[productId].minimumQuantity ? PRODUCTS[productId].minimumQuantity : 1;
+            const currentQty = parseInt(input.value, 10) || minQty;
+            input.value = Math.max(minQty, currentQty - 1);
+        });
+
+        plusBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const currentQty = parseInt(input.value, 10) || 1;
+            input.value = currentQty + 1;
+        });
+
+        input.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        input.addEventListener('input', function() {
+            const productId = input.getAttribute('data-id');
+            const minQty = PRODUCTS[productId] && PRODUCTS[productId].minimumQuantity ? PRODUCTS[productId].minimumQuantity : 1;
+            const currentQty = parseInt(input.value, 10);
+            if (!currentQty || currentQty < minQty) input.value = minQty;
+        });
+    });
+
     // Attach Add to Cart event listeners
     const addBtns = galleryGrid.querySelectorAll('.btn-add-to-cart');
     addBtns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.stopPropagation(); // prevent lightbox if we implement it
             const productId = this.getAttribute('data-id');
+            const qtyInput = galleryGrid.querySelector(`.product-qty-input[data-id="${productId}"]`);
+            const minQty = PRODUCTS[productId] && PRODUCTS[productId].minimumQuantity ? PRODUCTS[productId].minimumQuantity : 1;
+            const qty = qtyInput ? Math.max(minQty, parseInt(qtyInput.value, 10) || minQty) : minQty;
             if (typeof Cart !== 'undefined') {
-                Cart.add(productId, 1);
+                Cart.add(productId, qty);
                 if (typeof updateCartBadge === 'function') updateCartBadge();
-                if (typeof showCartToast === 'function') showCartToast(PRODUCTS[productId].name + " added to cart");
+                if (typeof showCartToast === 'function') showCartToast(qty + " × " + PRODUCTS[productId].name + " added to cart");
             }
         });
     });
@@ -264,16 +306,18 @@ function initBookingForm() {
     const contactPhoneInput = document.getElementById('contact-phone');
     const specialRequestsInput = document.getElementById('special-requests');
     
-    // Pricing data (per chair)
     const pricingData = {
-        'chiavari-gold': 12,
-        'chiavari-silver': 12,
-        'chiavari-white': 12,
-        'ghost': 15,
-        'cross-back-natural': 14,
-        'cross-back-walnut': 14,
-        'folding-white': 8,
-        'folding-black': 8
+        'chiavari-gold': 2,
+        'chiavari-silver': 2,
+        'chiavari-white': 2,
+        'ghost': 2,
+        'ghost-chair': 2,
+        'cross-back': 2,
+        'cross-back-natural': 2,
+        'cross-back-walnut': 2,
+        'folding-white': 2,
+        'folding-black': 2,
+        'chair-with-cover': 2.5
     };
     
     // Add date input validation

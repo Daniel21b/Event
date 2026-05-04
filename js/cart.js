@@ -37,6 +37,8 @@ const Cart = {
       return;
     }
     var cart = this.get();
+    var minQty = PRODUCTS[productId].minimumQuantity || 1;
+    if (qty < minQty) qty = minQty;
     cart[productId] = (cart[productId] || 0) + qty;
     if (cart[productId] <= 0) delete cart[productId];
     this._save(cart);
@@ -50,6 +52,9 @@ const Cart = {
     if (qty <= 0) {
       delete cart[productId];
     } else {
+      var product = PRODUCTS[productId];
+      var minQty = product && product.minimumQuantity ? product.minimumQuantity : 1;
+      if (qty < minQty) qty = minQty;
       cart[productId] = qty;
     }
     this._save(cart);

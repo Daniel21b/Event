@@ -14,7 +14,8 @@ const PRODUCTS = {
     unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chairs.png",
-    category: "chairs"
+    category: "chairs",
+    minimumQuantity: 10
   },
   "chiavari-silver": {
     id: "chiavari-silver",
@@ -22,7 +23,8 @@ const PRODUCTS = {
     unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chair2.png",
-    category: "chairs"
+    category: "chairs",
+    minimumQuantity: 10
   },
   "ghost-chair": {
     id: "ghost-chair",
@@ -30,7 +32,8 @@ const PRODUCTS = {
     unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chairs.png",
-    category: "chairs"
+    category: "chairs",
+    minimumQuantity: 10
   },
   "cross-back": {
     id: "cross-back",
@@ -38,7 +41,8 @@ const PRODUCTS = {
     unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chair2.png",
-    category: "chairs"
+    category: "chairs",
+    minimumQuantity: 10
   },
   "folding-white": {
     id: "folding-white",
@@ -46,7 +50,8 @@ const PRODUCTS = {
     unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chairs.png",
-    category: "chairs"
+    category: "chairs",
+    minimumQuantity: 10
   },
   "folding-black": {
     id: "folding-black",
@@ -54,7 +59,8 @@ const PRODUCTS = {
     unitAmount: 200,        // $2.00
     currency: "usd",
     image: "img/chairs/chair2.png",
-    category: "chairs"
+    category: "chairs",
+    minimumQuantity: 10
   },
   "chair-with-cover": {
     id: "chair-with-cover",
@@ -62,7 +68,8 @@ const PRODUCTS = {
     unitAmount: 250,        // $2.50
     currency: "usd",
     image: "img/chairs/chairs.png",
-    category: "chairs"
+    category: "chairs",
+    minimumQuantity: 10
   },
 
   // ── Tables ──
